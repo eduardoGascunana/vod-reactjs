@@ -16,6 +16,9 @@ class Menu extends React.Component {
   onClickItem (index) {
     console.log("Menu - onClickItem: ",index)
 
+    if (this.props.handleClickMenuItem) {
+      this.props.handleClickMenuItem(index)
+    }
     this.setState({
       indexSelected: index
     })
