@@ -1,12 +1,19 @@
 import React from 'react'
+import styles from './List.css'
 import List from '../../components/list/List'
+import Menu from '../../components/menu/Menu'
 
 class ViewList extends React.Component {
   constructor(props) {
     super(props)
+    this.onClickMenuItem = this.onClickMenuItem.bind(this)
     this.onClickCover = this.onClickCover.bind(this)
     this.onClickIconCart = this.onClickIconCart.bind(this)
     this.onClickRating = this.onClickRating.bind(this)
+  }
+  onClickMenuItem(index) {
+    console.log("ViewList - onClickMenuItem: ",index)
+    this.props.handleClickMenuItem(index)
   }   
   onClickCover(info) {
     console.log("ViewList - onClickCover")
@@ -21,14 +28,22 @@ class ViewList extends React.Component {
     this.props.handleClickRating(info)
   }    
   render () {
-    console.log("ViewList - render: ", this.props.items)
+    console.log("ViewList - render: ", this.props)
 
     return (
-      <List
-        data={this.props.items}
-        handleClickCover={this.onClickCover}
-        handleClickIconCart={this.onClickIconCart}
-        handleClickRating={this.onClickRating} />
+      <div 
+        className={styles.container}>
+        <Menu 
+          className={styles.menu}
+          categories={this.props.categories} 
+          handleClickMenuItem={this.onClickMenuItem} />
+        <List
+          className={styles.list}
+          data={this.props.movies}
+          handleClickCover={this.onClickCover}
+          handleClickIconCart={this.onClickIconCart}
+          handleClickRating={this.onClickRating} />
+      </div>
     )
   }
 }
