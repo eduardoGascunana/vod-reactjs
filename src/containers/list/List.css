@@ -1,0 +1,22 @@
+.container{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+.menu{
+  flex-basis: 15%;
+  flex-grow: 1;
+  -webkit-order: 1;
+  order: 1
+}
+.list{
+  flex-basis: 85%;
+  flex-grow: 3;
+  -webkit-order: 2;
+  order: 2;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}
