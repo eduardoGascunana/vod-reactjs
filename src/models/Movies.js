@@ -1,4 +1,4 @@
-class DataModel {
+class MoviesModel {
   constructor() {
     this.category = null
     this.listByCategory = []
@@ -20,7 +20,7 @@ class DataModel {
     })
   }
   setItemCart (item) {
-    console.log("data - setItemCart: ",item)
+    console.log("moviesModel - setItemCart: ",item)
 
     const pos = this.listByCategory.findIndex((cover) => {
       return cover.id === item.id
@@ -62,4 +62,4 @@ class DataModel {
   } 
 }
 
-export default DataModel
+export default MoviesModel
