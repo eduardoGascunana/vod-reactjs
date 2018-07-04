@@ -13,7 +13,7 @@ class ViewList extends React.Component {
   }
   onClickMenuItem(index) {
     console.log("ViewList - onClickMenuItem: ",index)
-    this.props.handleClickMenuItem(index)
+    this.props.handleClickMenuItem(index, this.props.history)
   }   
   onClickCover(info) {
     console.log("ViewList - onClickCover")
