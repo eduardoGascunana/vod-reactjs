@@ -9,7 +9,8 @@ class Cover extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isOverDetail: false
+      isOverDetail: false,
+      isAddCart: this.props.data.isAddCart
     }
     this.onClickCover = this.onClickCover.bind(this)
     this.onMouseOverCover = this.onMouseOverCover.bind(this)
@@ -17,9 +18,6 @@ class Cover extends React.Component {
     this.onClickRating = this.onClickRating.bind(this)
     this.onClickIconCart = this.onClickIconCart.bind(this)
   }
-  /* componentWillReceiveProps(nextProps) {
-    console.log("componentWillReceiveProps: ",nextProps);
-  } */
   onClickCover(ev) {
     console.log("Cover - onClickCover")
 
@@ -46,20 +44,23 @@ class Cover extends React.Component {
     })
   }
   onClickIconCart(isAdd) {
-    console.log("Cover - onClickIconCart - isAdd: ", isAdd)
+    console.log("Cover - onClickIconCart")
 
-    if (this.props.handleClickIconCart) {
-      this.props.handleClickIconCart({
-        id: this.props.data.id,
-        isAdd: isAdd
-      })
-    }  
+    this.setState({
+      isAddCart: !this.props.data.isAddCart
+    }, () => {
+      console.log("Cover - onClickIconCart: state.isAddCart: ",this.state.isAddCart)
+
+      if (this.props.handleClickIconCart) {
+        this.props.handleClickIconCart({
+          id: this.props.data.id,
+          isAdd: this.state.isAddCart
+        })
+      }      
+    });
   }
   onClickRating(rate) {
     console.log("Cover - onClickRating - rate: ",rate)
-
-    // props are read-only !!!
-    // this.props.rate = rate
 
     if (this.props.handleClickRating) {
       this.props.handleClickRating({
@@ -69,14 +70,15 @@ class Cover extends React.Component {
     }
   }
   render() {
-    // console.log("Core - render")
+    console.log("Cover - render ")
 
     const {data} = this.props
+    const valueIcon = this.state.isAddCart ? 'addToCart' : 'removeToCart'
     let imgPath
     try {
-      imgPath = require(`../../images/${data.cover}`)
+      imgPath = require(`../../common/images/${data.cover}`)
     } catch(err) {
-      imgPath = require(`../../images/default.jpg`)
+      imgPath = require(`../../common/images/default.jpg`)
     }
     const classOverDetail = classNames(
       styles.coverDetail,
@@ -98,7 +100,7 @@ class Cover extends React.Component {
           <div className={styles.coverDetailRow}>
             <span className={styles.coverDetailRowPrice}>{data.price} €</span>
             <div className={classNames(styles.coverDetailRowIcon,  styles.coverCursor)}>
-              <IconCart isAdd={data.isAddCart} handleClick={this.onClickIconCart}/>
+              <IconCart type={valueIcon} handleClick={this.onClickIconCart}/>
             </div>
           </div>
         </div>
@@ -112,7 +114,7 @@ class Cover extends React.Component {
 }
 
 Cover.propTypes = {
-  rate: PropTypes.number,
+  data: PropTypes.object,
   handleClick: PropTypes.func,
   handleClickIconCart: PropTypes.func,
   handleClickRating: PropTypes.func
