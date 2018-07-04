@@ -5,13 +5,13 @@
   width: 24px;
   height: 24px;
 }
-/* .black {
+.black {
   color: black;
   fill: black;
   stroke: none;
   width: 24px;
   height: 24px;
-} */
+}
 .cursor {
   cursor: pointer;
 }
