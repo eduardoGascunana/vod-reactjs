@@ -5,6 +5,8 @@ class MoviesModel {
     this.dataItem = {}
     this.dataCart = []
     this.listRateModified = []
+
+    this.itemToRender = null
   }
   setNameCategory (data) {
     data.forEach((item) => {
@@ -27,7 +29,8 @@ class MoviesModel {
     })
     this.listByCategory[pos].isAddCart = item.isAdd
     this.dataItem.isAddCart = item.isAdd
-    return this.listByCategory
+    // return this.listByCategory
+    this.itemToRender()
   }
   modifyRate (item) {
     const pos = this.listByCategory.findIndex((cover) => {
@@ -45,6 +48,8 @@ class MoviesModel {
     /* TO-DO */
   }
   getItems (category) {
+    console.log("Movies - getItems: ",category)
+
     this.category = category
     return fetch(process.env.PUBLIC_URL + '/data/' + category + '.json')
       .then(response => {
@@ -59,6 +64,11 @@ class MoviesModel {
       .catch(e => {
         console.error('ERROR: ', e)
       })
+  }
+  subscribe (item) {
+    console.log("Movies - subscribe")
+
+    this.itemToRender = item
   } 
 }
 
