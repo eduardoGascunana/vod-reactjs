@@ -9,8 +9,7 @@ class Cover extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isOverDetail: false,
-      isAddCart: this.props.data.isAddCart
+      isOverDetail: false
     }
     this.onClickCover = this.onClickCover.bind(this)
     this.onMouseOverCover = this.onMouseOverCover.bind(this)
@@ -19,13 +18,10 @@ class Cover extends React.Component {
     this.onClickIconCart = this.onClickIconCart.bind(this)
   }
   onClickCover(ev) {
-    console.log("Cover - onClickCover")
+    // console.log("Cover - onClickCover")
 
     if (this.props.handleClick) {
       this.props.handleClick(this.props.data)
-      
-      /* const url = this.props.id ? 'detail/' + this.props.nameCategory : null
-      window.history.pushState({}, null, url) */
     }    
     ev.stopPropagation()
   }
@@ -44,23 +40,17 @@ class Cover extends React.Component {
     })
   }
   onClickIconCart(isAdd) {
-    console.log("Cover - onClickIconCart")
+    // console.log("Cover - onClickIconCart: ", this.props.data.isAddCart)
 
-    this.setState({
-      isAddCart: !this.props.data.isAddCart
-    }, () => {
-      console.log("Cover - onClickIconCart: state.isAddCart: ",this.state.isAddCart)
-
-      if (this.props.handleClickIconCart) {
-        this.props.handleClickIconCart({
-          id: this.props.data.id,
-          isAdd: this.state.isAddCart
-        })
-      }      
-    });
+    if (this.props.handleClickIconCart) {
+      this.props.handleClickIconCart({
+        id: this.props.data.id,
+        isAdd: !this.props.data.isAddCart
+      })
+    }      
   }
   onClickRating(rate) {
-    console.log("Cover - onClickRating - rate: ",rate)
+    // console.log("Cover - onClickRating - rate: ",rate)
 
     if (this.props.handleClickRating) {
       this.props.handleClickRating({
@@ -69,11 +59,16 @@ class Cover extends React.Component {
       })
     }
   }
+  shouldComponentUpdate (nextProps, nextState) {
+    return (nextProps.data.isAddCart !== this.props.data.isAddCart || 
+      nextProps.data.rate !== this.props.data.rate || 
+      nextState.isOverDetail !== this.state.isOverDetail)
+  }
   render() {
-    console.log("Cover - render ")
+    // console.log("Cover - render ")
 
     const {data} = this.props
-    const valueIcon = this.state.isAddCart ? 'addToCart' : 'removeToCart'
+    const valueIcon = data.isAddCart ? 'addToCart' : 'removeToCart'
     let imgPath
     try {
       imgPath = require(`../../common/images/${data.cover}`)
