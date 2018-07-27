@@ -15,7 +15,7 @@ class Rating extends React.Component {
     this.onMouseLeave = this.onMouseLeave.bind(this)
   }
   onClick(ev) {
-    let val = Number(ev.target.dataset.rate)
+    const val = Number(ev.target.dataset.rate)
     this.setState({
       moving: val,
       selected: val
@@ -38,21 +38,20 @@ class Rating extends React.Component {
     ev.stopPropagation()
   }
   render() {
-    // console.log("Rating - render")
-
-    let ratingNodes = []
-    // uso mejor array.map de ES6 ??????
-    for (let i=this.props.length; i>0; i--) {
-      let classActive = classNames(
-        styles.ratingStar,
-        {
-          [styles.starActive]: i <= this.state.moving
-        }
-      )
-      ratingNodes.push(
-        <div key={i} data-rate={i} className={classActive}></div>
-      )
-    }
+    const ratingNodes = Array(this.props.length)
+      .fill(null)
+      .map((item, index) => {
+        const classActive = classNames(
+          styles.ratingStar,
+          {
+            [styles.starActive]: this.props.length - index <= this.state.moving
+          }
+        )
+        const value = this.props.length - index
+        return (
+          <div key={value}  data-rate={value} className={classActive}></div>
+        )
+      })
     return (
       <div 
         id="idStars" 
