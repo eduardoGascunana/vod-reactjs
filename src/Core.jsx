@@ -6,11 +6,13 @@ import {
 import { 
   Switch
 } from 'react-router'
+import $ from 'jquery'
+import styles from './common/css/styles.css'
 import MoviesModel from './models/Movies'
 import CategoriesModel from './models/Categories'
-import styles from './common/css/styles.css'
-import ViewList from './containers/list/List'
 import Header from './components/header/Header'
+import ViewList from './containers/viewList/ViewList'
+import ViewDetail from './containers/viewDetail/ViewDetail';
 
 class Core extends React.Component {
   constructor(props) {
@@ -20,7 +22,8 @@ class Core extends React.Component {
       // viewSelected: null,
       category: 'home',
       movies: [],
-      categories: []
+      categories: [],
+      infoDetail: null
     }
     this.moviesModel = new MoviesModel()
     this.categoriesModel = new CategoriesModel()
@@ -29,11 +32,13 @@ class Core extends React.Component {
     this.onClickIconCart = this.onClickIconCart.bind(this)
     this.onClickRating = this.onClickRating.bind(this)    
   }
+  reloadItemsLoaded () {
+    this.setState({
+      movies: this.moviesModel.getItemsCached()
+    })
+  }
   componentWillMount() {
-    console.log("Core - componenteWillMount")
-
-    this.moviesModel.subscribe(this.render.bind(this))
-
+    this.moviesModel.subscribe(this.reloadItemsLoaded.bind(this))
     this.categoriesModel.getItems()
       .then(response => {
         const categories = response
@@ -50,8 +55,6 @@ class Core extends React.Component {
       })
   }
   onClickMenuItem(index, history) {
-    console.log("Core - onClickMenuItem: ", index)
-
     const name = this.categoriesModel.getNameCategory(index)
     this.moviesModel.getItems(name)
       .then(response => {
@@ -67,34 +70,23 @@ class Core extends React.Component {
       })
   }
   onClickCover(info, history) {
-    console.log("Core - onClickCover: ",info)
     /* TO-DO */
     /*    https://stackoverflow.com/questions/42123261/programmatically-navigate-using-react-router-v4 */
     this.setState({
-      viewSelected: 'detail'
+      viewSelected: 'detail',
+      infoDetail: info
     })
-    history.push('detail/' + info.nameCategory + '/' + info.id)
+    history.push('/detail/' + info.nameCategory + '/' + info.id)
   }
   onClickIconCart(info) {
     console.log("Core - onClickIconCart - info: ", info)
 
-    /* this.setState({
-      movies: this.moviesModel.setItemCart(info)
-    }) */
     this.moviesModel.setItemCart(info)
   }
   onClickRating(info) {
-    console.log("Core - onClickIconRating - info: ", info)
-
-    /* this.setState({
-      movies: this.moviesModel.modifyRate(info)
-    }) */
+    this.moviesModel.modifyRate(info)
   }    
   render() {
-    if (this.state.movies[0]) {
-      console.log("Core - render ",this.state.movies[5].isAddCart)
-    }
-
     return (
       <main className={styles.main} >
         <Header 
@@ -105,7 +97,7 @@ class Core extends React.Component {
             <Route path='/list/:category' render={(props) => (
               <ViewList 
                 {...props} 
-                movies={this.state.movies} 
+                movies={$.extend(true, [], this.state.movies)} 
                 categories={this.state.categories}
                 handleClickCover={this.onClickCover}
                 handleClickIconCart={this.onClickIconCart}
@@ -113,7 +105,14 @@ class Core extends React.Component {
                 handleClickMenuItem={this.onClickMenuItem}
               />
             )}/>
-            {/* <Route path='/detail/:category/:id' component={ViewDetail} data={}/> */}
+            <Route path='/detail/:category/:id' render={(props) => (
+              <ViewDetail
+                {...props}
+                data={this.state.infoDetail}
+                handleClickIconCart={this.onClickIconCart}
+                handleClickRating={this.onClickRating}  
+              />              
+            )}/>
             {/* <Route path='/cart' component={ViewCart} data={}/> */}
           </Switch>
         </BrowserRouter>
