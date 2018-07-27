@@ -15,14 +15,15 @@ class MenuItem extends React.Component {
     this.onMouseLeave = this.onMouseLeave.bind(this)    
   }
   componentWillReceiveProps(nextProps) {
-    console.log("MenuItem - componentWillReceiveProps: ",nextProps);
-
     if (nextProps.isSelected !== this.props.isSelected) {
       this.setState({
         isSelected: nextProps.isSelected
       })
     }
   }  
+  shouldComponentUpdate(nextProps, nextState) {
+    return JSON.stringify(nextProps) !== JSON.stringify(this.props) || JSON.stringify(nextState) !== JSON.stringify(this.state)
+  }
   onClick(ev) {
     console.log("MenuItem - onClick")
 
@@ -48,8 +49,6 @@ class MenuItem extends React.Component {
     ev.stopPropagation()
   }
   render() {
-    console.log("MenuItem - render: ",this.props.title)
-    
     const classActive = classNames(
       styles.item,
       {
