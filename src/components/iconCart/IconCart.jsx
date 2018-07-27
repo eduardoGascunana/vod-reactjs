@@ -16,16 +16,12 @@ class IconCart extends React.Component {
     this.onClick = this.onClick.bind(this)
   }
   onClick(ev) {
-    console.log("IconCart - onClick ")
-
     if (this.props.handleClick) {
       this.props.handleClick()
     }   
     ev.stopPropagation()
   }
   render() {
-    console.log("IconCart - render ")
-
     const classIcon = classNames(
       styles.cursor,
       {
@@ -35,7 +31,7 @@ class IconCart extends React.Component {
         [styles.white]: this.props.color !== 'black'
       }
       /* 
-        TODO no funciona ¿?¿?¿?
+        TO-DO no funciona ¿?¿?¿?
       */
       // { [`styles.${this.state.color}`]: true }
     )
