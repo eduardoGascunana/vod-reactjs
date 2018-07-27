@@ -22,14 +22,12 @@ class MoviesModel {
     })
   }
   setItemCart (item) {
-    console.log("moviesModel - setItemCart: ",item)
-
     const pos = this.listByCategory.findIndex((cover) => {
       return cover.id === item.id
     })
     this.listByCategory[pos].isAddCart = item.isAdd
     this.dataItem.isAddCart = item.isAdd
-    // return this.listByCategory
+
     this.itemToRender()
   }
   modifyRate (item) {
@@ -40,16 +38,14 @@ class MoviesModel {
     this.dataItem.rate = item.rate
     /* 
       TO-DO 
-      modificar "listRateModified"
+      modificar "listRateModified" para que al modificar el "rate" de un "item", si cambio de genero y vuelvo, que muestre el "rate" modificado (y guardado en "listRateMofified" en lugar del devuelto)
     */
-   return this.listByCategory
+    this.itemToRender()
   }
   getRateStoraged () {
     /* TO-DO */
   }
   getItems (category) {
-    console.log("Movies - getItems: ",category)
-
     this.category = category
     return fetch(process.env.PUBLIC_URL + '/data/' + category + '.json')
       .then(response => {
@@ -65,9 +61,10 @@ class MoviesModel {
         console.error('ERROR: ', e)
       })
   }
+  getItemsCached () {
+    return this.listByCategory
+  }
   subscribe (item) {
-    console.log("Movies - subscribe")
-
     this.itemToRender = item
   } 
 }
