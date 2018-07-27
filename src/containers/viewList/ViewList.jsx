@@ -1,5 +1,6 @@
 import React from 'react'
-import styles from './List.css'
+import PropTypes from 'prop-types'
+import styles from './ViewList.css'
 import List from '../../components/list/List'
 import Menu from '../../components/menu/Menu'
 
@@ -12,24 +13,18 @@ class ViewList extends React.Component {
     this.onClickRating = this.onClickRating.bind(this)
   }
   onClickMenuItem(index) {
-    console.log("ViewList - onClickMenuItem: ",index)
     this.props.handleClickMenuItem(index, this.props.history)
   }   
   onClickCover(info) {
-    console.log("ViewList - onClickCover")
     this.props.handleClickCover(info, this.props.history)
   }
   onClickIconCart(info) {
-    console.log("ViewList - onClickIconCart - isAdd: ", info)
     this.props.handleClickIconCart(info)
   }  
   onClickRating(info) {
-    console.log("ViewList - onClickRating - rate: ", info)
     this.props.handleClickRating(info)
   }    
   render () {
-    console.log("ViewList - render: ", this.props)
-
     return (
       <div 
         className={styles.container}>
@@ -46,6 +41,15 @@ class ViewList extends React.Component {
       </div>
     )
   }
+}
+
+ViewList.propTypes = {
+  movies: PropTypes.array,
+  categories: PropTypes.array,
+  handleClickMenuItem: PropTypes.func,
+  handleClickCover: PropTypes.func,
+  handleClickIconCart: PropTypes.func,
+  handleClickRating: PropTypes.func
 }
 
 export default ViewList
