@@ -7,8 +7,6 @@ class Menu extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isHover: false,
-      isSelected: false,
       indexSelected: this.props.indexSelected
     }
     this.onClickItem = this.onClickItem.bind(this)
