@@ -22,11 +22,11 @@ class MenuItem extends React.Component {
     }
   }  
   shouldComponentUpdate(nextProps, nextState) {
-    return JSON.stringify(nextProps) !== JSON.stringify(this.props) || JSON.stringify(nextState) !== JSON.stringify(this.state)
+    return (nextProps.isSelected !== this.props.isSelected ||
+      nextState.isHover !== this.state.isHover ||
+      nextState.isSelected !== this.state.isSelected)
   }
   onClick(ev) {
-    console.log("MenuItem - onClick")
-
     this.setState({
       isSelected: true
     })
