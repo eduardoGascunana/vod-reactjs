@@ -72,7 +72,7 @@ class ViewDetail extends React.Component {
           </div>
           <div className={styles.rowDetail}>
             <div className={styles.col1}>Genre</div>
-            <div className={styles.col2}>{data.genre}</div>
+            <div className={styles.col2}>{data.nameCategory}</div>
           </div>
           <div className={styles.rowDetail}>
             <div className={styles.col1}>Price</div>

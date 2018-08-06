@@ -2,7 +2,6 @@ class MoviesModel {
   constructor() {
     this.category = null
     this.listByCategory = []
-    this.dataItem = {}
     this.dataCart = []
     this.listRateModified = []
 
@@ -26,7 +25,6 @@ class MoviesModel {
       return cover.id === item.id
     })
     this.listByCategory[pos].isAddCart = item.isAdd
-    this.dataItem.isAddCart = item.isAdd
 
     this.itemToRender()
   }
@@ -35,7 +33,6 @@ class MoviesModel {
       return cover.id === item.id
     })
     this.listByCategory[pos].rate = item.rate
-    this.dataItem.rate = item.rate
     /* 
       TO-DO 
       modificar "listRateModified" para que al modificar el "rate" de un "item", si cambio de genero y vuelvo, que muestre el "rate" modificado (y guardado en "listRateMofified" en lugar del devuelto)

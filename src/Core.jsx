@@ -33,8 +33,17 @@ class Core extends React.Component {
     this.onClickRating = this.onClickRating.bind(this)    
   }
   reloadItemsLoaded () {
+    const movies = this.moviesModel.getItemsCached()
+    let infoDetail = this.state.infoDetail
+    if (this.state.infoDetail) {
+      const pos = movies.findIndex((cover) => {
+        return cover.id === this.state.infoDetail.id
+      }) 
+      infoDetail = movies[pos]
+    }
     this.setState({
-      movies: this.moviesModel.getItemsCached()
+      movies: movies,
+      infoDetail: infoDetail
     })
   }
   componentWillMount() {
@@ -79,8 +88,6 @@ class Core extends React.Component {
     history.push('/detail/' + info.nameCategory + '/' + info.id)
   }
   onClickIconCart(info) {
-    console.log("Core - onClickIconCart - info: ", info)
-
     this.moviesModel.setItemCart(info)
   }
   onClickRating(info) {
