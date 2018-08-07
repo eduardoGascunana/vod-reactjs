@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Rating from '../rating/Rating'
-import IconCart from '../iconCart/IconCart'
+import Icon from '../icon/Icon'
 import styles from './Cover.css'
 import classNames from 'classnames'
 
@@ -83,7 +83,7 @@ class Cover extends React.Component {
           <div className={styles.coverDetailRow}>
             <span className={styles.coverDetailRowPrice}>{data.price} €</span>
             <div className={classNames(styles.coverDetailRowIcon,  styles.coverCursor)}>
-              <IconCart type={valueIcon} handleClick={this.onClickIconCart}/>
+              <Icon type={valueIcon} handleClick={this.onClickIconCart}/>
             </div>
           </div>
         </div>

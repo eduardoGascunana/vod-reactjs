@@ -1,5 +1,5 @@
 import React from 'react'
-import IconCart from '../iconCart/IconCart'
+import Icon from '../icon/Icon'
 // import PropTypes from 'prop-types'
 import styles from './Header.css'
 
@@ -16,13 +16,13 @@ class Header extends React.Component {
     if (this.state.viewSelected === 'list') {
       groupLinks.push(
         <div key='cart' className={styles.icon}>
-          <IconCart type='cart' color='black'/>
+          <Icon type='cart' color='black'/>
           <div className='text-btn'>Cart &nbsp;</div>
         </div>
       )
       groupLinks.push(
         <div key='exit' className={styles.icon}>
-          <IconCart type='exit' color='black'/>
+          <Icon type='exit' color='black'/>
           <div className='text-btn'>Exit &nbsp;</div>
         </div>
       )
