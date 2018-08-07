@@ -2,38 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Rating from '../../components/rating/Rating'
 import styles from './ViewDetail.css'
-// import classNames from 'classnames'
 
 class ViewDetail extends React.Component {
   constructor(props) {
-    console.log("ViewDetail")
-
-    super(props)
-    this.state = {
-      isAddCart: this.props.data.isAddCart
-    }    
+  super(props)
     this.onClickIconCart = this.onClickIconCart.bind(this)
     this.onClickRating = this.onClickRating.bind(this)
   }
-  onClickIconCart(isAdd) {    
-    console.log("ViewDetail - onClickIconCart - isAdd: ", isAdd)
-
-    this.setState({
-      isAddCart: !this.props.data.isAddCart
-    }, () => {
-      console.log("ViewDetail - onClickIconCart: state.isAddCart: ", this.state.isAddCart)
-
-      if (this.props.handleClickIconCart) {
-        this.props.handleClickIconCart({
-          id: this.props.data.id,
-          isAdd: this.state.isAddCart
-        })
-      }
-    });
+  onClickIconCart() {    
+    if (this.props.handleClickIconCart) {
+      this.props.handleClickIconCart({
+        id: this.props.data.id,
+        isAdd: !this.props.data.isAddCart
+      })
+    }
   }
   onClickRating(rate) {
-    console.log("ViewDetail - onClickRating - rate: ", rate)
-
     if (this.props.handleClickRating) {
       this.props.handleClickRating({
         id: this.props.data.id,
@@ -42,16 +26,14 @@ class ViewDetail extends React.Component {
     }
   }
   render() {
-    console.log("ViewDetail - render ", this.props.data)
-
-    const { data } = this.props
+    const {data} = this.props
     let imgPath
     try {
       imgPath = require(`../../common/images/${data.cover}`)
     } catch (err) {
       imgPath = require(`../../common/images/default.jpg`)
     }
-    const textBtnCart = this.state.isAddCart ? 'Remove from Cart' : 'Add to cart'
+    const textBtnCart = data.isAddCart ? 'Remove from Cart' : 'Add to cart'
     return (
       <div className={styles.container}>
         <div className={styles.containerImg}>
