@@ -18,30 +18,22 @@ class Cover extends React.Component {
     this.onClickIconCart = this.onClickIconCart.bind(this)
   }
   onClickCover(ev) {
-    // console.log("Cover - onClickCover")
-
     if (this.props.handleClick) {
       this.props.handleClick(this.props.data)
     }    
     ev.stopPropagation()
   }
   onMouseOverCover(ev) {
-    // console.log("Cover - onMouseOverCover")
-
     this.setState({
       isOverDetail: true
     })
   }
   onMouseLeaveCover(ev) {
-    // console.log("Cover - onMouseLeaveCover")
-
     this.setState({
       isOverDetail: false
     })
   }
   onClickIconCart(isAdd) {
-    // console.log("Cover - onClickIconCart: ", this.props.data.isAddCart)
-
     if (this.props.handleClickIconCart) {
       this.props.handleClickIconCart({
         id: this.props.data.id,
@@ -50,8 +42,6 @@ class Cover extends React.Component {
     }      
   }
   onClickRating(rate) {
-    // console.log("Cover - onClickRating - rate: ",rate)
-
     if (this.props.handleClickRating) {
       this.props.handleClickRating({
         id: this.props.data.id,
@@ -65,8 +55,6 @@ class Cover extends React.Component {
       nextState.isOverDetail !== this.state.isOverDetail)
   }
   render() {
-    // console.log("Cover - render ")
-
     const {data} = this.props
     const valueIcon = data.isAddCart ? 'addToCart' : 'removeToCart'
     let imgPath
