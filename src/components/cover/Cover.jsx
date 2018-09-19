@@ -79,7 +79,7 @@ class Cover extends React.Component {
         <div className={classOverDetail}>
           <div className={styles.coverDetailTitle}>{data.name}</div>
           <div className={styles.coverDetailRating}>
-            <Rating rate={data.rate} handleClick={this.onClickRating}/>
+            <Rating id={data.id} rate={data.rate} handleClick={this.onClickRating}/>
           </div>
           <div className={styles.coverDetailRow}>
             <span className={styles.coverDetailRowPrice}>{data.price} €</span>

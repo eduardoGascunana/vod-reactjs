@@ -7,12 +7,22 @@ class Rating extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      id: this.props.id,
       moving: this.props.rate,
       selected: this.props.rate
     }
     this.onClick = this.onClick.bind(this)
     this.onMouseOver = this.onMouseOver.bind(this)
     this.onMouseLeave = this.onMouseLeave.bind(this)
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return nextProps.id !== prevState.id 
+      ? {
+        id: nextProps.id,
+        moving: nextProps.rate,
+        selected: nextProps.rate      
+      } 
+      : null
   }
   onClick(ev) {
     const val = Number(ev.target.dataset.rate)
@@ -71,6 +81,7 @@ Rating.defaultProps = {
 }
 
 Rating.propTypes = {
+  id: PropTypes.String,
   rate: PropTypes.number,
   handleClick: PropTypes.func
 }
