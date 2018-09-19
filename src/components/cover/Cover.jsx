@@ -50,7 +50,8 @@ class Cover extends React.Component {
     }
   }
   shouldComponentUpdate (nextProps, nextState) {
-    return (nextProps.data.isAddCart !== this.props.data.isAddCart || 
+    return (nextProps.data.id !== this.props.data.id || 
+      nextProps.data.isAddCart !== this.props.data.isAddCart || 
       nextProps.data.rate !== this.props.data.rate || 
       nextState.isOverDetail !== this.state.isOverDetail)
   }
