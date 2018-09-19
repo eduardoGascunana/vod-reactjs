@@ -33,14 +33,16 @@ class MoviesModel {
       return cover.id === item.id
     })
     this.listByCategory[pos].rate = item.rate
-    /* 
-      TO-DO 
-      modificar "listRateModified" para que al modificar el "rate" de un "item", si cambio de genero y vuelvo, que muestre el "rate" modificado (y guardado en "listRateMofified" en lugar del devuelto)
-    */
+    this.saveRateLocalStorage(item)
     this.itemToRender()
   }
-  getRateStoraged () {
-    /* TO-DO */
+  getRateStoraged (data) {
+    const list = JSON.parse(localStorage.getItem('listItemsRateModified')) || []
+    return data.map(item => {
+      const storaged = list.find(store => store.id === item.id)
+      item.rate = storaged ? storaged.rate : item.rate
+      return item
+    })
   }
   getItems (category) {
     this.category = category
@@ -49,7 +51,7 @@ class MoviesModel {
         return response.json()
       })
       .then(data => {
-        this.listByCategory = data
+        this.listByCategory = this.getRateStoraged(data)
         this.setNameCategory(this.listByCategory)
         this.setIsCart(this.listByCategory)        
         return this.listByCategory
@@ -60,6 +62,16 @@ class MoviesModel {
   }
   getItemsCached () {
     return this.listByCategory
+  }
+  saveRateLocalStorage (item) {
+    let list = JSON.parse(localStorage.getItem('listItemsRateModified')) || []
+    const index = list.findIndex(storage => item.id === storage.id)
+    if (index !== -1) {
+      list[index].rate = item.rate
+      localStorage.setItem('listItemsRateModified', JSON.stringify(list))
+    } else {
+      localStorage.setItem('listItemsRateModified', JSON.stringify([...list, item]))
+    }
   }
   subscribe (item) {
     this.itemToRender = item
