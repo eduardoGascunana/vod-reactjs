@@ -35,9 +35,13 @@ class Cover extends React.Component {
   }
   onClickIconCart(isAdd) {
     if (this.props.handleClickIconCart) {
+      const {data} = this.props
       this.props.handleClickIconCart({
-        id: this.props.data.id,
-        isAdd: !this.props.data.isAddCart
+        id: data.id,
+        isAdd: !data.isAddCart,
+        name: data.name,
+        price: data.price,
+        cover: data.cover
       })
     }      
   }
