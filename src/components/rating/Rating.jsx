@@ -7,9 +7,9 @@ class Rating extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: this.props.id,
-      moving: this.props.rate,
-      selected: this.props.rate
+      id: 0,
+      moving: 0,
+      selected: 0
     }
     this.onClick = this.onClick.bind(this)
     this.onMouseOver = this.onMouseOver.bind(this)
@@ -81,7 +81,7 @@ Rating.defaultProps = {
 }
 
 Rating.propTypes = {
-  id: PropTypes.String,
+  id: PropTypes.string,
   rate: PropTypes.number,
   handleClick: PropTypes.func
 }
