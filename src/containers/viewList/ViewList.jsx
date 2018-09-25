@@ -31,6 +31,7 @@ class ViewList extends React.Component {
         <Menu 
           className={styles.menu}
           categories={this.props.categories} 
+          categorySelected={this.props.categorySelected}
           handleClickMenuItem={this.onClickMenuItem} />
         <List
           className={styles.list}
@@ -46,6 +47,7 @@ class ViewList extends React.Component {
 ViewList.propTypes = {
   movies: PropTypes.array,
   categories: PropTypes.array,
+  categorySelected: PropTypes.string,
   handleClickMenuItem: PropTypes.func,
   handleClickCover: PropTypes.func,
   handleClickIconCart: PropTypes.func,
