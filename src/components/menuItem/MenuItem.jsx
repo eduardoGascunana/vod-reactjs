@@ -8,19 +8,19 @@ class MenuItem extends React.Component {
     super(props)
     this.state = {
       isHover: false,
-      isSelected: this.props.isSelected
+      isSelected: false
     }
     this.onClick = this.onClick.bind(this)
     this.onMouseOver = this.onMouseOver.bind(this)
     this.onMouseLeave = this.onMouseLeave.bind(this)    
-  }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isSelected !== this.props.isSelected) {
-      this.setState({
+  } 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return nextProps.isSelected !== prevState.isSelected 
+      ? {
         isSelected: nextProps.isSelected
-      })
-    }
-  }  
+      }
+      : null
+  }
   shouldComponentUpdate(nextProps, nextState) {
     return (nextProps.isSelected !== this.props.isSelected ||
       nextState.isHover !== this.state.isHover ||

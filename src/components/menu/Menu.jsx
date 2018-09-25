@@ -7,13 +7,18 @@ class Menu extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      indexSelected: this.props.indexSelected
+      indexSelected: 0
     }
     this.onClickItem = this.onClickItem.bind(this)
   }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return nextProps.indexSelected !== prevState.indexSelected
+      ? {
+        indexSelected: nextProps.categories.findIndex(item => item.name === nextProps.categorySelected)
+      }
+      : null
+  }  
   onClickItem (index) {
-    console.log("Menu - onClickItem: ",index)
-
     if (this.props.handleClickMenuItem) {
       this.props.handleClickMenuItem(index)
     }
@@ -22,8 +27,6 @@ class Menu extends React.Component {
     })
   }
   render () {
-    console.log("Menu - render ",this.state.indexSelected)
-
     const listItems = this.props.categories.map((item, index) => {
       return (
         <li 
@@ -52,6 +55,7 @@ class Menu extends React.Component {
 
 Menu.propTypes = {
   categories: PropTypes.array,
+  categorySelected: PropTypes.string,
   indexSelected: PropTypes.number
 }
 
