@@ -8,13 +8,14 @@ class CartItem extends React.Component {
     super (props)
     this.onClickIconDelete = this.onClickIconDelete.bind(this)
   }  
-  onClickIconDelete () {
+  onClickIconDelete (ev) {
     if (this.props.handleClickDelete) {
       this.props.handleClickDelete({
         id: this.props.data.id,
         isAdd: !this.props.data.isAddCart
       })
-    }     
+    }
+    ev.stopPropagation()     
   }
   render () {
     const { data } = this.props
