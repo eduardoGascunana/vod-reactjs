@@ -12,18 +12,23 @@ import MoviesModel from './models/Movies'
 import CategoriesModel from './models/Categories'
 import CartModel from './models/Cart'
 import Header from './components/header/Header'
+import ViewHome from './containers/viewHome/ViewHome'
 import ViewList from './containers/viewList/ViewList'
 import ViewDetail from './containers/viewDetail/ViewDetail';
 import ViewCart from './containers/viewCart/ViewCart';
+
+const CATEGORY_INIT ='Home'
+const VIEW = {
+  DETAIL: 'detail',
+  LIST: 'list'
+}
 
 class Core extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      viewSelected: 'list',
-      // viewSelected: null,
-      category: 'Action',
-      // category: 'home',
+      viewSelected: null,
+      category: null,
       movies: [],
       categories: [],
       infoDetail: null,
@@ -38,7 +43,9 @@ class Core extends React.Component {
     this.onClickRating = this.onClickRating.bind(this)    
     this.onClickHeaderItem = this.onClickHeaderItem.bind(this)
     this.onClickIconDelete = this.onClickIconDelete.bind(this)
-  }
+    this.onClickEmptyCart = this.onClickEmptyCart.bind(this)
+    this.onClickAccess = this.onClickAccess.bind(this)
+  } 
   componentWillMount() {
     this.moviesModel.subscribe(this.reloadItemsLoaded.bind(this))
     let categories = null
@@ -46,7 +53,7 @@ class Core extends React.Component {
     this.categoriesModel.getItems()
       .then(response => {
         categories = response
-        return this.moviesModel.getItems(this.state.category)
+        return this.moviesModel.getItems(CATEGORY_INIT)
       })
       .then(response => { 
         movies = response  
@@ -54,8 +61,10 @@ class Core extends React.Component {
       })
       .then(response => {      
         this.setState({
-          movies: this.completeInfoMovies(movies, this.state.category, response),
+          viewSelected: CATEGORY_INIT,
+          movies: this.completeInfoMovies(movies, CATEGORY_INIT, response),
           categories: categories,
+          category: CATEGORY_INIT,
           cart: response
         })              
       })
@@ -63,10 +72,20 @@ class Core extends React.Component {
   componentDidUpdate() {
     window.onpopstate = (ev) => {
       const pathName = ev.currentTarget.location.pathname.split('/')
-      this.setState({
-        viewSelected: pathName[1],
-        category: pathName[2]
-      })
+      if (this.state.viewSelected === pathName[1] && this.state.category !== pathName[2]) {
+        this.moviesModel.getItems(pathName[2])
+          .then(response => {
+            this.setState({
+              movies: this.completeInfoMovies(response, this.state.category, this.state.cart),
+              category: pathName[2]
+            })
+          })
+      } else {
+        this.setState({
+          viewSelected: pathName[1],
+          category: pathName[2]
+        })
+      }
     }
   }
   completeInfoMovies(movies, category, cart) {
@@ -95,21 +114,21 @@ class Core extends React.Component {
           movies: this.completeInfoMovies(response, this.state.category, this.state.cart),
           category: name
         })
-        history.push('/list/' + name)                
+        history.push(`/${VIEW.LIST}/${name}`)                
       })
   }
   onClickHeaderItem(view, history) {
     this.setState({
       viewSelected: view
     })
-    history.push('/' + view + '/')     
+    history.push(`/${view}/`)     
   }
   onClickCover(info, history) {
     this.setState({
-      viewSelected: 'detail',
+      viewSelected: VIEW.DETAIL,
       infoDetail: info
     })
-    history.push('/detail/' + info.nameCategory + '/' + info.id)
+    history.push(`/${VIEW.DETAIL}/${info.nameCategory}/${info.id}`)
   }
   onClickIconCart(info) {
     const modifyCartModel = (item) => {
@@ -135,20 +154,46 @@ class Core extends React.Component {
         })        
       })
   }
+  onClickEmptyCart() {
+    this.cartModel.allDelete()
+      .then(response => {
+        this.setState({
+          movies: this.completeInfoMovies(this.state.movies, this.state.category, response),
+          cart: response
+        })         
+      })
+  }
+  onClickAccess(info, history) {
+    this.moviesModel.getItems(info.category)
+      .then(response => {
+        history.push(`/${info.view}/${info.category}`)        
+        this.setState({
+          viewSelected: info.view,
+          movies: this.completeInfoMovies(response, info.category, this.state.cart),
+          category: info.category
+        }) 
+      })   
+  }
   render() {
     return (
       <main className={styles.main} >
         <BrowserRouter>
           <div>
-            <Route render={(props) => (
+            <Route render={props => (
               <Header
                 {...props}
                 viewSelected={this.state.viewSelected}
                 handleClick={this.onClickHeaderItem} />        
             )}/>
             <Switch>
-              <Route exact path='/' component={Home} />
-              <Route path='/list/:category' render={(props) => (
+              <Route exact path='/' render={props => (
+                <ViewHome
+                  {...props}
+                  movies={this.state.movies}
+                  handleClickAccess={this.onClickAccess}
+                />
+              )} />
+              <Route path='/list/:category' render={props => (
                 <ViewList 
                   {...props} 
                   movies={$.extend(true, [], this.state.movies)} 
@@ -160,7 +205,7 @@ class Core extends React.Component {
                   handleClickMenuItem={this.onClickMenuItem}
                 />
               )}/>
-              <Route path='/detail/:category/:id' render={(props) => (
+              <Route path='/detail/:category/:id' render={props => (
                 <ViewDetail
                   {...props}
                   data={this.state.infoDetail}
@@ -168,23 +213,24 @@ class Core extends React.Component {
                   handleClickRating={this.onClickRating}  
                 />              
               )}/>
-              <Route path='/cart' render={(props) => (
+              <Route path='/cart' render={props => (
                 <ViewCart
                   {...props}
                   data={this.state.cart}
                   handleClickIconDelete={this.onClickIconDelete}   
+                  handleClickEmptyCart={this.onClickEmptyCart}   
                 />
               )}/>
-            </Switch>
+            </Switch>       
+            <footer className={styles.mainFooter}>
+              <div>Eduardo Gascuñana Martos</div>
+              <a href="https://www.linkedin.com/in/eduardo-gascu%C3%B1ana-martos-84269b37/">Linkedin</a>
+            </footer>           
           </div>
         </BrowserRouter>
       </main>
     )
   }
-}
-
-const Home = () => {
-  return (<h1>Estoy en la HOME</h1>)
 }
 
 export default Core
