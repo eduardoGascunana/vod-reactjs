@@ -33,7 +33,7 @@ class Cover extends React.Component {
       isOverDetail: false
     })
   }
-  onClickIconCart(isAdd) {
+  onClickIconCart(ev) {
     if (this.props.handleClickIconCart) {
       const {data} = this.props
       this.props.handleClickIconCart({
@@ -43,7 +43,8 @@ class Cover extends React.Component {
         price: data.price,
         cover: data.cover
       })
-    }      
+    }
+    ev.stopPropagation()     
   }
   onClickRating(rate) {
     if (this.props.handleClickRating) {
