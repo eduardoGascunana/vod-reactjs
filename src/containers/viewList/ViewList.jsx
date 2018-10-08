@@ -28,17 +28,19 @@ class ViewList extends React.Component {
     return (
       <div 
         className={styles.container}>
-        <Menu 
-          className={styles.menu}
-          categories={this.props.categories} 
-          categorySelected={this.props.categorySelected}
-          handleClickMenuItem={this.onClickMenuItem} />
-        <List
-          className={styles.list}
-          data={this.props.movies}
-          handleClickCover={this.onClickCover}
-          handleClickIconCart={this.onClickIconCart}
-          handleClickRating={this.onClickRating} />
+        <div className={styles.menu}>
+          <Menu 
+            categories={this.props.categories} 
+            categorySelected={this.props.categorySelected}
+            handleClickMenuItem={this.onClickMenuItem} />
+        </div>
+        <div className={styles.list}>
+          <List            
+            data={this.props.movies}
+            handleClickCover={this.onClickCover}
+            handleClickIconCart={this.onClickIconCart}
+            handleClickRating={this.onClickRating} />
+        </div>
       </div>
     )
   }
