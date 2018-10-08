@@ -2,14 +2,35 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Icon from '../icon/Icon'
 import styles from './Header.css'
+import Modal from '../../components/modal/Modal'
+// import utils from '../../common/utils'
 
+// const { locale: localeUtils } = utils
+const locale = {
+  title: 'Videoclub',
+  options: {
+    back: 'Back',
+    cart: 'Cart',
+    exit: 'Exit'
+  }, 
+  modalExit: {
+    header: 'Exit',
+    body: 'Are you sure you want to exit the application?'
+  },
+  yes: 'Yes',
+  not: 'Not'
+}
 class Header extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
-      viewSelected: ''
+      viewSelected: '',
+      showModalExit: false
     }
     this.onClickMenu = this.onClickMenu.bind(this)
+    this.onClickExit = this.onClickExit.bind(this)
+    this.onClickBack = this.onClickBack.bind(this)
+    this.onClickExitModal = this.onClickExitModal.bind(this)
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     return nextProps.viewSelected !== prevState.viewSelected
@@ -18,60 +39,89 @@ class Header extends React.Component {
       }
       : null
   }  
-  onClickMenu(ev) {
+  onClickMenu (ev) {
     if (this.props.handleClick) {
       this.props.handleClick(ev.currentTarget.dataset.headerItem, this.props.history)
     }
     ev.stopPropagation()
   }
-  render() {
-    let groupLinks = []
-    // groupLinks.push(<div className='main-header-right-side'>)
-    if (this.state.viewSelected === 'list') {
-      groupLinks.push(
+  onClickExit (ev) {
+    this.setState({
+      showModalExit: true
+    })
+    ev.stopPropagation()
+  }
+  onClickExitModal (ev) {
+    if (Number(ev.target.id) === 0) {
+      if (this.props.handleClick) {
+        this.props.handleClick('home', this.props.history)
+      }
+    }
+    this.setState({
+      showModalExit: false
+    })
+    ev.stopPropagation()
+  }
+  onClickBack () {
+    this.props.history.goBack()
+  }
+  render () {
+    let modalExit = null
+    if (this.state.showModalExit) {
+      modalExit = <Modal
+        header={locale.modalExit.header}
+        body={locale.modalExit.body}
+        options={[locale.yes, locale.not]}
+        handle={this.onClickExitModal}
+      />
+    }    
+    let groupLinksRightSide = []
+    let groupLinksLeftSide = []
+    const { options } = locale
+    if (['cart', 'detail'].includes(this.state.viewSelected)) {
+      groupLinksLeftSide.push(
+        <div key='back' data-header-item='back' className={styles.icon} onClick={this.onClickBack}>
+          <Icon type='back' color='black' />
+          <div className='text-btn'>{options.back} &nbsp;</div>
+        </div>          
+      )
+    }
+    if (['list', 'detail'].includes(this.state.viewSelected)) {
+      groupLinksRightSide.push(
         <div key='cart' data-header-item='cart' className={styles.icon} onClick={this.onClickMenu}>
           <Icon type='cart' color='black'/>
-          <div className='text-btn'>Cart &nbsp;</div>
+          <div className='text-btn'>{options.cart} &nbsp;</div>
         </div>
       )
-      groupLinks.push(
-        <div key='exit' data-header-item='exit' className={styles.icon} onClick={this.onClickMenu}>
+      groupLinksRightSide.push(
+        <div key='exit' data-header-item='home' className={styles.icon} onClick={this.onClickExit}>
           <Icon type='exit' color='black'/>
-          <div className='text-btn'>Exit &nbsp;</div>
+          <div className='text-btn'>{options.exit} &nbsp;</div>
         </div>
       )
-    } else if (this.state.viewSelected === 'detail') {
-      groupLinks.push(<div key='cart' data-header-item='cart' className='text-btn'>Cart &nbsp;</div>)
-      groupLinks.push(<div key='exit' data-header-item='exit' className='text-btn'>Exit &nbsp;</div>)
     } else if (this.state.viewSelected === 'cart') {
-      groupLinks.push(<div key='exit' data-header-item='exit' className='text-btn'>Exit &nbsp;</div>)
+      groupLinksRightSide.push(
+        <div key='exit' data-header-item='home' className={styles.icon} onClick={this.onClickExit}>
+          <Icon type='exit' color='black' />
+          <div className='text-btn'>{options.exit} &nbsp;</div>
+        </div>
+      )    
     }
-    // groupLinks.push(</div>)
-    
     return (
       <div>
         <header className={styles.header}>
-          Videoclub
+          {locale.title}
         </header>
         <div className={styles.mainHeader}>
-          {/* <div class='btn-back-web'>
-            <iron-icon icon='arrow-back'></iron-icon>
-            <div class='text-btn'>Back &nbsp;</div>
-          </div> */}
           <div className={styles.mainHeaderLeftSide}>
-            <iron-icon id="idIconMenu" icon="menu" class="btn-menu"></iron-icon>
-            <iron-icon id="idIconBack" icon="arrow-back" class="btn-back"></iron-icon>
-
+            {groupLinksLeftSide}
           </div>
-          {/* <div class='btn-offline' style$='display: {{displayOffline}}'>
-            <iron-icon icon='report-problem'></iron-icon>
-            <div class='text-btn'>No Connection &nbsp;&nbsp;</div>
-          </div> */}
           <div className={styles.mainHeaderRightSide}>
-            {groupLinks}
+            {groupLinksRightSide}
           </div>
         </div>
-      </div >
+        {modalExit}
+      </div>
     )
   }
 }

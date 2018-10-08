@@ -21,8 +21,11 @@
   /* cursor: pointer; */
 }
 .mainHeaderLeftSide {
-  flex-shrink: 0;
-  width: 40px; 
+    /* flex-shrink: 0;
+    width: 40px;  */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 .icon {
   display: flex;
