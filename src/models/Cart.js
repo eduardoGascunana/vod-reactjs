@@ -19,6 +19,12 @@ class CartModel {
       this.get().then(response => resolve(response))
     })    
   }
+  allDelete () {
+    return new Promise((resolve, reject) => {
+      this.data = []
+      this.get().then(response => resolve(response))
+    })
+  }
   get () {
     return new Promise((resolve, reject) => {
       resolve(this.data)
