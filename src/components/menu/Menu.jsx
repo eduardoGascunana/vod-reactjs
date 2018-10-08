@@ -14,7 +14,7 @@ class Menu extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     return nextProps.indexSelected !== prevState.indexSelected
       ? {
-        indexSelected: nextProps.categories.findIndex(item => item.name === nextProps.categorySelected)
+        indexSelected: nextProps.categories.findIndex(item => item.name.toLowerCase() === nextProps.categorySelected.toLowerCase())
       }
       : null
   }  
