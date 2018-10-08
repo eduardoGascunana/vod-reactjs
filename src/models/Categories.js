@@ -1,3 +1,5 @@
+const urlCategories = '/data/Categories.json'
+
 class CategoriesModel {
   constructor() {
     this.data = []
@@ -6,7 +8,7 @@ class CategoriesModel {
     return this.data[index].name
   }
   getItems(category) {
-    return fetch(process.env.PUBLIC_URL + '/data/Categories.json')
+    return fetch(process.env.PUBLIC_URL + urlCategories)
       .then(response => {
         return response.json()
       })

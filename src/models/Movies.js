@@ -1,3 +1,4 @@
+const nameLocalStorage = 'listItemsRateModified'
 class MoviesModel {
   constructor () {
     this.listByCategory = []
@@ -15,7 +16,7 @@ class MoviesModel {
     this.itemToRender()
   }
   getRateStoraged (data) {
-    const list = JSON.parse(localStorage.getItem('listItemsRateModified')) || []
+    const list = JSON.parse(localStorage.getItem(nameLocalStorage)) || []
     return data.map(item => {
       const storaged = list.find(store => store.id === item.id)
       item.rate = storaged ? storaged.rate : item.rate
@@ -37,13 +38,13 @@ class MoviesModel {
     return this.listByCategory
   }
   saveRateLocalStorage (item) {
-    let list = JSON.parse(localStorage.getItem('listItemsRateModified')) || []
+    let list = JSON.parse(localStorage.getItem(nameLocalStorage)) || []
     const index = list.findIndex(storage => item.id === storage.id)
     if (index !== -1) {
       list[index].rate = item.rate
-      localStorage.setItem('listItemsRateModified', JSON.stringify(list))
+      localStorage.setItem(nameLocalStorage, JSON.stringify(list))
     } else {
-      localStorage.setItem('listItemsRateModified', JSON.stringify([...list, item]))
+      localStorage.setItem(nameLocalStorage, JSON.stringify([...list, item]))
     }
   }
   subscribe (item) {
