@@ -4,22 +4,22 @@ import styles from './List.css'
 import Cover from '../cover/Cover'
 
 class List extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.onClickCover = this.onClickCover.bind(this)
     this.onClickIconCart = this.onClickIconCart.bind(this)
     this.onClickRating = this.onClickRating.bind(this)
   }  
-  onClickCover(info) {
+  onClickCover (info) {
     this.props.handleClickCover(info)
   }
-  onClickIconCart(info) {
+  onClickIconCart (info) {
     this.props.handleClickIconCart(info)
   }  
-  onClickRating(info) {
+  onClickRating (info) {
     this.props.handleClickRating(info)
   }  
-  render() {
+  render () {
     let listCover = this.props.data.map((item, index) => {
       return <Cover 
         key={index} 

@@ -4,14 +4,14 @@ import styles from './Menu.css'
 import MenuItem from '../menuItem/MenuItem'
 
 class Menu extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       indexSelected: 0
     }
     this.onClickItem = this.onClickItem.bind(this)
   }
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps (nextProps, prevState) {
     return nextProps.indexSelected !== prevState.indexSelected
       ? {
         indexSelected: nextProps.categories.findIndex(item => item.name.toLowerCase() === nextProps.categorySelected.toLowerCase())

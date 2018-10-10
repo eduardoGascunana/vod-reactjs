@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './Modal.css'
 
+const DEFAULT_CLASS = 'modalButton'
 class Modal extends React.Component {
   constructor (props) {
     super(props)
@@ -40,7 +41,7 @@ class Modal extends React.Component {
 }
 
 Modal.defaultProps = {
-  class: 'modalButton'
+  class: DEFAULT_CLASS
 }
 
 Modal.propTypes = {

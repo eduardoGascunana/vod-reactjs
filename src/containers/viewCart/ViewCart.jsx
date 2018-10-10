@@ -4,26 +4,9 @@ import styles from './ViewCart.css'
 import CartItem from '../../components/cartItem/CartItem'
 import Modal from '../../components/modal/Modal'
 import utils  from '../../common/utils'
+import locale from '../../common/locale.js'
 
 const { locale: localeUtils } = utils
-const locale = {
-  header: 'Your cart',
-  headerEmpty: ' is empty',
-  modalEmpty: {
-    header: 'Deletion process',
-    body: 'Are you sure you want to empty the cart?'
-  },
-  modalBuy: {
-    header: 'Purchasing process',
-    body: `Congratulations! you have your ${localeUtils.symbol} movies available to watch when you want`
-  },
-  yes: 'Yes',
-  not: 'Not',
-  accept: 'Accept',
-  buy: 'Buy',
-  empty: 'Empty',
-  total: `Total ${localeUtils.symbol}€`
-}
 
 class ViewCart extends React.Component {
   constructor (props) {
@@ -73,9 +56,9 @@ class ViewCart extends React.Component {
   }
   render () {
     let body = null
-    let txtHeader = locale.header
+    let txtHeader = locale.VIEW_CART.HEADER
     if (this.props.data.length === 0) {
-      txtHeader += locale.headerEmpty
+      txtHeader += locale.VIEW_CART.HEADER_EMPTY
     } else {
       let listCart = this.props.data.map((item, index) => {
         return <CartItem
@@ -86,16 +69,16 @@ class ViewCart extends React.Component {
       let modal = null
       if (this.state.showModalEmpty) {
         modal = <Modal 
-          header={locale.modalEmpty.header}
-          body={locale.modalEmpty.body}
-          options={[locale.yes, locale.not]}
+          header={locale.VIEW_CART.MODAL_EMPTY.HEADER}
+          body={locale.VIEW_CART.MODAL_EMPTY.BODY}
+          options={[locale.YES, locale.NOT]}
           handle={this.onClickEmptyCartModal}
         />
       } else if (this.state.showModalBuy) {
         modal = <Modal 
-          header={locale.modalBuy.header}
-          body={localeUtils.format(locale.modalBuy.body, [this.props.data.length])}
-          options={[locale.accept]}
+          header={locale.VIEW_CART.MODAL_BUY.HEADER}
+          body={localeUtils.format(locale.VIEW_CART.MODAL_BUY.BODY, [this.props.data.length])}
+          options={[locale.ACCEPT]}
           handle={this.onClickBuyCartModal}
         />   
       }   
@@ -111,13 +94,13 @@ class ViewCart extends React.Component {
             </div>
             <div className={styles.cartListSummary}>
               <div className={styles.cartListSummaryTotal}>
-                {localeUtils.format(locale.total, [this.getTotalAmount()])}
+                {localeUtils.format(locale.VIEW_CART.TOTAL, [this.getTotalAmount()])}
               </div>
               <button className={styles.cartBtnBuy} onClick={this.onClickBuy}>
-                {locale.buy}
+                {locale.BUY}
               </button>
               <button className={styles.cartBtnEmpty} onClick={this.onClickEmpty}>
-              {locale.empty}
+              {locale.EMPTY}
               </button>
             </div>
           </div>

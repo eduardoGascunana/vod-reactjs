@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Img.css'
 
 class Img extends React.Component {
-  render() {
+  render () {
     const {data} = this.props
     let imgPath
     try {

@@ -5,23 +5,23 @@ import List from '../../components/list/List'
 import Menu from '../../components/menu/Menu'
 
 class ViewList extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.onClickMenuItem = this.onClickMenuItem.bind(this)
     this.onClickCover = this.onClickCover.bind(this)
     this.onClickIconCart = this.onClickIconCart.bind(this)
     this.onClickRating = this.onClickRating.bind(this)
   }
-  onClickMenuItem(index) {
+  onClickMenuItem (index) {
     this.props.handleClickMenuItem(index, this.props.history)
   }   
-  onClickCover(info) {
+  onClickCover (info) {
     this.props.handleClickCover(info, this.props.history)
   }
-  onClickIconCart(info) {
+  onClickIconCart (info) {
     this.props.handleClickIconCart(info)
   }  
-  onClickRating(info) {
+  onClickRating (info) {
     this.props.handleClickRating(info)
   }    
   render () {

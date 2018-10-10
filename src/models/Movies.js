@@ -1,4 +1,6 @@
-const nameLocalStorage = 'listItemsRateModified'
+import constants from '../common/constants.js'
+
+const NAME_LOCAL_STORAGE = 'listItemsRateModified'
 class MoviesModel {
   constructor () {
     this.listByCategory = []
@@ -16,7 +18,7 @@ class MoviesModel {
     this.itemToRender()
   }
   getRateStoraged (data) {
-    const list = JSON.parse(localStorage.getItem(nameLocalStorage)) || []
+    const list = JSON.parse(localStorage.getItem(NAME_LOCAL_STORAGE)) || []
     return data.map(item => {
       const storaged = list.find(store => store.id === item.id)
       item.rate = storaged ? storaged.rate : item.rate
@@ -24,7 +26,7 @@ class MoviesModel {
     })
   }
   getItems (category) {
-    return fetch(process.env.PUBLIC_URL + '/data/' + category + '.json')
+    return fetch(process.env.PUBLIC_URL + constants.DATA.FOLDER + category + constants.DATA.EXTENSION)
       .then(response => response.json())
       .then(data => {
         this.listByCategory = this.getRateStoraged(data)
@@ -38,13 +40,13 @@ class MoviesModel {
     return this.listByCategory
   }
   saveRateLocalStorage (item) {
-    let list = JSON.parse(localStorage.getItem(nameLocalStorage)) || []
+    let list = JSON.parse(localStorage.getItem(NAME_LOCAL_STORAGE)) || []
     const index = list.findIndex(storage => item.id === storage.id)
     if (index !== -1) {
       list[index].rate = item.rate
-      localStorage.setItem(nameLocalStorage, JSON.stringify(list))
+      localStorage.setItem(NAME_LOCAL_STORAGE, JSON.stringify(list))
     } else {
-      localStorage.setItem(nameLocalStorage, JSON.stringify([...list, item]))
+      localStorage.setItem(NAME_LOCAL_STORAGE, JSON.stringify([...list, item]))
     }
   }
   subscribe (item) {

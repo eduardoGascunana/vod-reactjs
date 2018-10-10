@@ -4,7 +4,7 @@ import styles from './Rating.css'
 import classNames from 'classnames'
 
 class Rating extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       id: 0,
@@ -15,7 +15,7 @@ class Rating extends React.Component {
     this.onMouseOver = this.onMouseOver.bind(this)
     this.onMouseLeave = this.onMouseLeave.bind(this)
   }
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps (nextProps, prevState) {
     return nextProps.id !== prevState.id 
       ? {
         id: nextProps.id,
@@ -24,7 +24,7 @@ class Rating extends React.Component {
       } 
       : null
   }
-  onClick(ev) {
+  onClick (ev) {
     const val = Number(ev.target.dataset.rate)
     this.setState({
       moving: val,
@@ -35,19 +35,19 @@ class Rating extends React.Component {
     }
     ev.stopPropagation()
   }
-  onMouseOver(ev) {
+  onMouseOver (ev) {
     this.setState({
       moving: Number(ev.target.dataset.rate)
     })
     ev.stopPropagation()
   }
-  onMouseLeave(ev) {
+  onMouseLeave (ev) {
     this.setState({
       moving: this.state.selected
     })
     ev.stopPropagation()
   }
-  render() {
+  render () {
     const ratingNodes = Array(this.props.length)
       .fill(null)
       .map((item, index) => {
@@ -64,7 +64,6 @@ class Rating extends React.Component {
       })
     return (
       <div 
-        id="idStars" 
         className={styles.rating} 
         ref={(stars) => {this.containerStars = stars}} 
         onClick={this.onClick} 

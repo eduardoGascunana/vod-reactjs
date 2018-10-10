@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './CartItem.css'
 import Icon from '../icon/Icon'
+import constants from '../../common/constants.js'
 
 class CartItem extends React.Component {
   constructor (props) {
-    super (props)
+    super(props)
     this.onClickIconDelete = this.onClickIconDelete.bind(this)
   }  
   onClickIconDelete (ev) {
@@ -24,7 +25,7 @@ class CartItem extends React.Component {
       imgPath = require(`../../common/images/${data.cover}`)
     } catch (err) {
       imgPath = require(`../../common/images/default.jpg`)
-    }    
+    }  
     return (
       <div className={styles.cartItem}>
         <div className={styles.cartItemCover}>
@@ -39,7 +40,7 @@ class CartItem extends React.Component {
               {data.price}€
               </div>
             <div className={styles.cartItemDelete}>
-              <Icon type='delete' color='black' handleClick={this.onClickIconDelete} />
+              <Icon type={constants.ICON.TYPE.DELETE} color={constants.ICON.COLOR.BLACK} handleClick={this.onClickIconDelete} />
             </div>
           </div>
         </div>        

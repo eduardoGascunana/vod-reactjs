@@ -4,9 +4,10 @@ import Rating from '../rating/Rating'
 import Icon from '../icon/Icon'
 import styles from './Cover.css'
 import classNames from 'classnames'
+import constants from '../../common/constants.js'
 
 class Cover extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       isOverDetail: false
@@ -17,23 +18,23 @@ class Cover extends React.Component {
     this.onClickRating = this.onClickRating.bind(this)
     this.onClickIconCart = this.onClickIconCart.bind(this)
   }
-  onClickCover(ev) {
+  onClickCover (ev) {
     if (this.props.handleClick) {
       this.props.handleClick(this.props.data)
     }    
     ev.stopPropagation()
   }
-  onMouseOverCover(ev) {
+  onMouseOverCover () {
     this.setState({
       isOverDetail: true
     })
   }
-  onMouseLeaveCover(ev) {
+  onMouseLeaveCover () {
     this.setState({
       isOverDetail: false
     })
   }
-  onClickIconCart(ev) {
+  onClickIconCart (ev) {
     if (this.props.handleClickIconCart) {
       const {data} = this.props
       this.props.handleClickIconCart({
@@ -46,7 +47,7 @@ class Cover extends React.Component {
     }
     ev.stopPropagation()     
   }
-  onClickRating(rate) {
+  onClickRating (rate) {
     if (this.props.handleClickRating) {
       this.props.handleClickRating({
         id: this.props.data.id,
@@ -60,9 +61,9 @@ class Cover extends React.Component {
       nextProps.data.rate !== this.props.data.rate || 
       nextState.isOverDetail !== this.state.isOverDetail)
   }
-  render() {
+  render () {
     const {data} = this.props
-    const valueIcon = data.isAddCart ? 'addToCart' : 'removeToCart'
+    const valueIcon = data.isAddCart ? constants.ICON.TYPE.ADD_TO_CART : constants.ICON.TYPE.REMOVE_TO_CART
     let imgPath
     try {
       imgPath = require(`../../common/images/${data.cover}`)

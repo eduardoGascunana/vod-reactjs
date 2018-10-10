@@ -1,8 +1,8 @@
-const nameLocalStorage = 'listCartMovies'
+const NAME_LOCAL_STORAGE = 'listCartMovies'
 
 class CartModel {
   constructor () {
-    this.data = JSON.parse(localStorage.getItem(nameLocalStorage)) || []
+    this.data = JSON.parse(localStorage.getItem(NAME_LOCAL_STORAGE)) || []
   }
   add (info) {
     return new Promise((resolve, reject) => {
@@ -31,7 +31,7 @@ class CartModel {
     })
   }
   setItemsLocalStorage () {
-    localStorage.setItem(nameLocalStorage, JSON.stringify(this.data))
+    localStorage.setItem(NAME_LOCAL_STORAGE, JSON.stringify(this.data))
   }
 }
 

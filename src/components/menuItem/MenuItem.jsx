@@ -4,7 +4,7 @@ import styles from './MenuItem.css'
 import classNames from 'classnames'
 
 class MenuItem extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       isHover: false,
@@ -14,19 +14,19 @@ class MenuItem extends React.Component {
     this.onMouseOver = this.onMouseOver.bind(this)
     this.onMouseLeave = this.onMouseLeave.bind(this)    
   } 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps (nextProps, prevState) {
     return nextProps.isSelected !== prevState.isSelected 
       ? {
         isSelected: nextProps.isSelected
       }
       : null
   }
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate (nextProps, nextState) {
     return (nextProps.isSelected !== this.props.isSelected ||
       nextState.isHover !== this.state.isHover ||
       nextState.isSelected !== this.state.isSelected)
   }
-  onClick(ev) {
+  onClick (ev) {
     this.setState({
       isSelected: true
     })
@@ -36,19 +36,19 @@ class MenuItem extends React.Component {
     ev.stopPropagation()
     ev.preventDefault()
   }  
-  onMouseOver(ev) {
+  onMouseOver (ev) {
     this.setState({
       isHover: true
     })
     ev.stopPropagation()
   }
-  onMouseLeave(ev) {
+  onMouseLeave (ev) {
     this.setState({
       isHover: false
     })
     ev.stopPropagation()
   }
-  render() {
+  render () {
     const classActive = classNames(
       styles.item,
       {

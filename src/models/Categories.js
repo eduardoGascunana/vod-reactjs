@@ -1,14 +1,16 @@
-const urlCategories = '/data/Categories.json'
+import constants from '../common/constants.js'
+
+const CATEGORIES = 'Categories'
 
 class CategoriesModel {
-  constructor() {
+  constructor () {
     this.data = []
   }
-  getNameCategory(index) {
+  getNameCategory (index) {
     return this.data[index].name
   }
-  getItems(category) {
-    return fetch(process.env.PUBLIC_URL + urlCategories)
+  getItems (category) {
+    return fetch(process.env.PUBLIC_URL + constants.DATA.FOLDER + CATEGORIES + constants.DATA.EXTENSION)
       .then(response => {
         return response.json()
       })

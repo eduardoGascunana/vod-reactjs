@@ -2,14 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Rating from '../../components/rating/Rating'
 import styles from './ViewDetail.css'
+import locale from '../../common/locale.js'
 
 class ViewDetail extends React.Component {
-  constructor(props) {
+  constructor (props) {
   super(props)
     this.onClickIconCart = this.onClickIconCart.bind(this)
     this.onClickRating = this.onClickRating.bind(this)
   }
-  onClickIconCart() {    
+  onClickIconCart () {    
     if (this.props.handleClickIconCart) {
       this.props.handleClickIconCart({
         id: this.props.data.id,
@@ -20,7 +21,7 @@ class ViewDetail extends React.Component {
       })     
     }
   }
-  onClickRating(rate) {
+  onClickRating (rate) {
     if (this.props.handleClickRating) {
       this.props.handleClickRating({
         id: this.props.data.id,
@@ -28,7 +29,7 @@ class ViewDetail extends React.Component {
       })
     }
   }
-  render() {
+  render () {
     const {data} = this.props
     let imgPath
     try {
@@ -36,7 +37,7 @@ class ViewDetail extends React.Component {
     } catch (err) {
       imgPath = require(`../../common/images/default.jpg`)
     }
-    const textBtnCart = data.isAddCart ? 'Remove from Cart' : 'Add to cart'
+    const textBtnCart = data.isAddCart ? locale.CART.REMOVE : locale.CART.ADD
     return (
       <div className={styles.container}>
         <div className={styles.containerImg}>
@@ -52,24 +53,24 @@ class ViewDetail extends React.Component {
             <h1>{data.name}</h1>
           </div>
           <div className={styles.rowDetail}>
-            <div className={styles.col1}>Year</div>
+            <div className={styles.col1}>{locale.VIEW_DETAIL.YEAR}</div>
             <div className={styles.col2}>{data.year}</div>
           </div>
           <div className={styles.rowDetail}>
-            <div className={styles.col1}>Genre</div>
+            <div className={styles.col1}>{locale.VIEW_DETAIL.GENRE}</div>
             <div className={styles.col2}>{data.nameCategory}</div>
           </div>
           <div className={styles.rowDetail}>
-            <div className={styles.col1}>Price</div>
+            <div className={styles.col1}>{locale.VIEW_DETAIL.PRICE}</div>
             <div className={styles.col2}>{data.price}</div>
           </div>
           <div className={styles.rowDetail}>
-            <div className={styles.col1}>Rate</div>
+            <div className={styles.col1}>{locale.VIEW_DETAIL.RATE}</div>
             <Rating rate={data.rate} handleClick={this.onClickRating}></Rating>
           </div>
         </div>
         <div className={styles.synopsis}>
-          <div>Description</div>
+          <div>{locale.VIEW_DETAIL.DESCRIPTION}</div>
           <div>{data.synopsis}</div>
         </div>
       </div>
