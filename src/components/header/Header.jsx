@@ -85,7 +85,7 @@ class Header extends React.Component {
       groupLinksLeftSide.push(
         <div key={constants.ICON.TYPE.BACK} data-header-item={constants.ICON.TYPE.BACK} className={styles.icon} onClick={this.onClickBack}>
           <Icon type={constants.ICON.TYPE.BACK} color={constants.ICON.COLOR.BLACK} />
-          <div className='text-btn'>{OPTIONS.BACK} &nbsp;</div>
+          <div className={styles.txtBtn}>{OPTIONS.BACK} &nbsp;</div>
         </div>          
       )
     }
@@ -93,20 +93,20 @@ class Header extends React.Component {
       groupLinksRightSide.push(
         <div key={constants.ICON.TYPE.CART} data-header-item={constants.ICON.TYPE.CART} className={styles.icon} onClick={this.onClickMenu}>
           <Icon type={constants.ICON.TYPE.CART} color={constants.ICON.COLOR.BLACK} />
-          <div className='text-btn'>{OPTIONS.CART} &nbsp;</div>
+          <div className={styles.txtBtn}>{OPTIONS.CART} &nbsp;</div>
         </div>
       )
       groupLinksRightSide.push(
         <div key={constants.ICON.TYPE.EXIT} data-header-item={constants.VIEW.HOME} className={styles.icon} onClick={this.onClickExit}>
           <Icon type={constants.ICON.TYPE.EXIT} color={constants.ICON.COLOR.BLACK} />
-          <div className='text-btn'>{OPTIONS.EXIT} &nbsp;</div>
+          <div className={styles.txtBtn}>{OPTIONS.EXIT} &nbsp;</div>
         </div>
       )
     } else if (this.state.viewSelected === constants.VIEW.CART) {
       groupLinksRightSide.push(
         <div key={constants.ICON.TYPE.EXIT} data-header-item={constants.VIEW.HOME} className={styles.icon} onClick={this.onClickExit}>
           <Icon type={constants.ICON.TYPE.EXIT} color={constants.ICON.COLOR.BLACK} />
-          <div className='text-btn'>{OPTIONS.EXIT} &nbsp;</div>
+          <div className={styles.txtBtn}>{OPTIONS.EXIT} &nbsp;</div>
         </div>
       )    
     }

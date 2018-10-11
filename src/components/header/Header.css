@@ -39,8 +39,14 @@
 .sideIconMenuShow {
   display: block;
 }
+.txtBtn {
+  display: none;
+}
 @media (min-width: 767px) {      
   .sideIconMenuShow {
     display: none;
+  }
+  .txtBtn {
+    display: block;
   }        
 }
