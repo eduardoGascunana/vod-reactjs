@@ -27,7 +27,8 @@ class Core extends React.Component {
       movies: [],
       categories: [],
       infoDetail: null,
-      cart: []
+      cart: [],
+      showSideMenu: false
     }
     this.moviesModel = new MoviesModel()
     this.categoriesModel = new CategoriesModel()
@@ -40,6 +41,7 @@ class Core extends React.Component {
     this.onClickIconDelete = this.onClickIconDelete.bind(this)
     this.onClickEmptyCart = this.onClickEmptyCart.bind(this)
     this.onClickAccess = this.onClickAccess.bind(this)
+    this.onSideMenu = this.onSideMenu.bind(this)
   } 
   componentWillMount () {
     this.moviesModel.subscribe(this.reloadItemsLoaded.bind(this))
@@ -181,6 +183,11 @@ class Core extends React.Component {
         }) 
       })   
   }
+  onSideMenu (show) {
+    this.setState({
+      showSideMenu: show
+    })
+  }
   render () {
     return (
       <main className={styles.main} >
@@ -190,7 +197,10 @@ class Core extends React.Component {
               <Header
                 {...props}
                 viewSelected={this.state.viewSelected}
-                handleClick={this.onClickHeaderItem} />        
+                handleClick={this.onClickHeaderItem} 
+                showSideMenu={this.state.showSideMenu}
+                handleSideMenu={this.onSideMenu}
+              />        
             )}/>
             <Switch>
               <Route path='(/home|/)' render={props => (
@@ -210,6 +220,8 @@ class Core extends React.Component {
                   handleClickIconCart={this.onClickIconCart}
                   handleClickRating={this.onClickRating}
                   handleClickMenuItem={this.onClickMenuItem}
+                  showSideMenu={this.state.showSideMenu}
+                  handleSideMenu={this.onSideMenu}
                 />
               )}/>
               <Route path='/detail/:category/:id' render={props => (
