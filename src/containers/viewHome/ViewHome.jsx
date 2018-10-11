@@ -11,12 +11,10 @@ class ViewHome extends React.Component {
     this.onClickAccess = this.onClickAccess.bind(this)
   } 
   onClickAccess (ev) {
-    if (this.props.handleClickAccess) {
-      this.props.handleClickAccess({
-        view: constants.VIEW.LIST,
-        category: constants.CATEGORY_INIT_LIST
-      },this.props.history)
-    }   
+    this.props.handleClickAccess && this.props.handleClickAccess({
+      view: constants.VIEW.LIST,
+      category: constants.CATEGORY_INIT_LIST
+    },this.props.history) 
     ev.stopPropagation()
   }
   render () {

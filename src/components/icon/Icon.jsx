@@ -21,9 +21,7 @@ class Icon extends React.Component {
     this.onClick = this.onClick.bind(this)
   }
   onClick (ev) {
-    if (this.props.handleClick) {
-      this.props.handleClick(ev)
-    }
+    this.props.handleClick && this.props.handleClick(ev)
   }
   render () {
     const classIcon = classNames(

@@ -30,9 +30,7 @@ class Rating extends React.Component {
       moving: val,
       selected: val
     })
-    if (this.props.handleClick) {
-      this.props.handleClick(val)
-    }
+    this.props.handleClick && this.props.handleClick(val)
     ev.stopPropagation()
   }
   onMouseOver (ev) {

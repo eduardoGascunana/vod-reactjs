@@ -30,9 +30,7 @@ class MenuItem extends React.Component {
     this.setState({
       isSelected: true
     })
-    if (this.props.handleClick) {
-      this.props.handleClick(this.props.index)
-    }
+    this.props.handleClick && this.props.handleClick(this.props.index)
     ev.stopPropagation()
     ev.preventDefault()
   }  

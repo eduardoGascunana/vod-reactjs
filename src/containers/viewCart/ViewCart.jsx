@@ -22,22 +22,20 @@ class ViewCart extends React.Component {
     this.onClickEmptyCartModal = this.onClickEmptyCartModal.bind(this)
   }
   onClickDelete (info) {
-    this.props.handleClickIconDelete(info)
+    this.props.handleClickIconDelete && this.props.handleClickIconDelete(info)
   } 
   onClickEmptyCartModal (ev) {
-    if (Number(ev.target.id) === 0) {
-      this.props.handleClickEmptyCart()
-    } else {
-      this.setState({
-        showModalEmpty: false
-      }) 
-    }
+    Number(ev.target.id) === 0
+      ? this.props.handleClickEmptyCart && this.props.handleClickEmptyCart()
+      : this.setState({
+          showModalEmpty: false
+        }) 
   }
   onClickBuyCartModal () {
     this.setState({
       showModalBuy: false
     })    
-    this.props.handleClickEmptyCart()
+    this.props.handleClickEmptyCart && this.props.handleClickEmptyCart()
   }
   onClickBuy () {
     this.setState({

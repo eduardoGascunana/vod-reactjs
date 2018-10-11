@@ -11,23 +11,20 @@ class ViewDetail extends React.Component {
     this.onClickRating = this.onClickRating.bind(this)
   }
   onClickIconCart () {    
-    if (this.props.handleClickIconCart) {
-      this.props.handleClickIconCart({
-        id: this.props.data.id,
-        isAdd: !this.props.data.isAddCart,
-        name: this.props.data.name,
-        price: this.props.data.price,
-        cover: this.props.data.cover        
-      })     
-    }
+    const {data} = this.props
+    this.props.handleClickIconCart && this.props.handleClickIconCart({
+      id: data.id,
+      isAdd: !data.isAddCart,
+      name: data.name,
+      price: data.price,
+      cover: data.cover        
+    })     
   }
   onClickRating (rate) {
-    if (this.props.handleClickRating) {
-      this.props.handleClickRating({
-        id: this.props.data.id,
-        rate: rate
-      })
-    }
+    this.props.handleClickRating && this.props.handleClickRating({
+      id: this.props.data.id,
+      rate: rate
+    })
   }
   render () {
     const {data} = this.props

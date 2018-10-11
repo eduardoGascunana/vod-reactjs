@@ -9,7 +9,7 @@ class Modal extends React.Component {
     this.onClickButtons = this.onClickButtons.bind(this)
   }
   onClickButtons (ev) {
-    this.props.handle(ev)
+    this.props.handle && this.props.handle(ev)
   }
   render () {
     const options = this.props.options.map((item, index) => {

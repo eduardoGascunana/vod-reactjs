@@ -11,13 +11,13 @@ class List extends React.Component {
     this.onClickRating = this.onClickRating.bind(this)
   }  
   onClickCover (info) {
-    this.props.handleClickCover(info)
+    this.props.handleClickCover && this.props.handleClickCover(info)
   }
   onClickIconCart (info) {
-    this.props.handleClickIconCart(info)
+    this.props.handleClickIconCart && this.props.handleClickIconCart(info)
   }  
   onClickRating (info) {
-    this.props.handleClickRating(info)
+    this.props.handleClickRating && this.props.handleClickRating(info)
   }  
   render () {
     let listCover = this.props.data.map((item, index) => {

@@ -94,10 +94,7 @@ class Core extends React.Component {
   }
   reloadItemsLoaded () {
     const movies = this.completeInfoMovies(this.moviesModel.getItemsCached(), this.state.category, this.state.cart)
-    let infoDetail = this.state.infoDetail
-    if (this.state.infoDetail) {
-      infoDetail = movies.find(cover => cover.id === this.state.infoDetail.id)
-    }
+    const infoDetail = this.state.infoDetail ? movies.find(cover => cover.id === this.state.infoDetail.id) : this.state.infoDetail
     this.setState({
       movies: movies,
       infoDetail: infoDetail

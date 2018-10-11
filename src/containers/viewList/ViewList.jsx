@@ -15,19 +15,19 @@ class ViewList extends React.Component {
     this.onSideMenu = this.onSideMenu.bind(this)
   }
   onClickMenuItem (index) {
-    this.props.handleClickMenuItem(index, this.props.history)
+    this.props.handleClickMenuItem && this.props.handleClickMenuItem(index, this.props.history)
   }   
   onClickCover (info) {
-    this.props.handleClickCover(info, this.props.history)
+    this.props.handleClickCover && this.props.handleClickCover(info, this.props.history)
   }
   onClickIconCart (info) {
-    this.props.handleClickIconCart(info)
+    this.props.handleClickIconCart && this.props.handleClickIconCart(info)
   }  
   onClickRating (info) {
-    this.props.handleClickRating(info)
+    this.props.handleClickRating && this.props.handleClickRating(info)
   }    
   onSideMenu (show) {
-    this.props.handleSideMenu(show)
+    this.props.handleSideMenu && this.props.handleSideMenu(show)
   }
   render () {
     let sideMenu = null

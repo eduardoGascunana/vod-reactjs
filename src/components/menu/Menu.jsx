@@ -19,9 +19,7 @@ class Menu extends React.Component {
       : null
   }  
   onClickItem (index) {
-    if (this.props.handleClickMenuItem) {
-      this.props.handleClickMenuItem(index)
-    }
+    this.props.handleClickMenuItem && this.props.handleClickMenuItem(index)
     this.setState({
       indexSelected: index
     })

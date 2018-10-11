@@ -19,9 +19,7 @@ class Cover extends React.Component {
     this.onClickIconCart = this.onClickIconCart.bind(this)
   }
   onClickCover (ev) {
-    if (this.props.handleClick) {
-      this.props.handleClick(this.props.data)
-    }    
+    this.props.handleClick && this.props.handleClick(this.props.data) 
     ev.stopPropagation()
   }
   onMouseOverCover () {
@@ -48,12 +46,10 @@ class Cover extends React.Component {
     ev.stopPropagation()     
   }
   onClickRating (rate) {
-    if (this.props.handleClickRating) {
-      this.props.handleClickRating({
-        id: this.props.data.id,
-        rate: rate
-      })
-    }
+    this.props.handleClickRating && this.props.handleClickRating({
+      id: this.props.data.id,
+      rate: rate
+    })
   }
   shouldComponentUpdate (nextProps, nextState) {
     return (nextProps.data.id !== this.props.data.id || 

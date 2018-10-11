@@ -31,9 +31,7 @@ class Header extends React.Component {
     this.props.handleSideMenu && this.props.handleSideMenu(!this.props.showSideMenu)
   }
   onClickMenu (ev) {
-    if (this.props.handleClick) {
-      this.props.handleClick(ev.currentTarget.dataset.headerItem, this.props.history)
-    }
+    this.props.handleClick && this.props.handleClick(ev.currentTarget.dataset.headerItem, this.props.history)
     ev.stopPropagation()
   }
   onClickExit (ev) {
@@ -44,9 +42,7 @@ class Header extends React.Component {
   }
   onClickExitModal (ev) {
     if (Number(ev.target.id) === 0) {
-      if (this.props.handleClick) {
-        this.props.handleClick(constants.VIEW.HOME, this.props.history)
-      }
+      this.props.handleClick && this.props.handleClick(constants.VIEW.HOME, this.props.history)
     }
     this.setState({
       showModalExit: false
