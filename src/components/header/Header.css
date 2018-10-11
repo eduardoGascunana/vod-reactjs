@@ -5,6 +5,9 @@
   margin: 5px;
   cursor: pointer;
 }
+.homeHeader {
+  border-bottom: 1px solid black;
+}
 .mainHeader {
   display: flex;
   flex-direction: row;
@@ -21,15 +24,26 @@
   /* cursor: pointer; */
 }
 .mainHeaderLeftSide {
-    /* flex-shrink: 0;
-    width: 40px;  */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  /* flex-shrink: 0;
+  width: 40px;  */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .icon {
   display: flex;
   flex-direction: row;
   align-items: center;
   cursor: pointer;
+}
+.sideIconMenuHide {
+  display: none;
+}
+.sideIconMenuShow {
+  display: block;
+}
+@media (min-width: 767px) {      
+  .sideIconMenuShow {
+    display: none;
+  }        
 }

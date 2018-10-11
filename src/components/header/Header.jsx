@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Icon from '../icon/Icon'
 import styles from './Header.css'
+import classNames from 'classnames'
 import Modal from '../../components/modal/Modal'
 import locale from '../../common/locale.js'
 import constants from '../../common/constants.js'
@@ -16,6 +17,7 @@ class Header extends React.Component {
     this.onClickMenu = this.onClickMenu.bind(this)
     this.onClickExit = this.onClickExit.bind(this)
     this.onClickBack = this.onClickBack.bind(this)
+    this.onClickSideMenu = this.onClickSideMenu.bind(this)
     this.onClickExitModal = this.onClickExitModal.bind(this)
   }
   static getDerivedStateFromProps (nextProps, prevState) {
@@ -24,7 +26,10 @@ class Header extends React.Component {
         viewSelected: nextProps.viewSelected
       }
       : null
-  }  
+  }
+  onClickSideMenu () {
+    this.props.handleSideMenu && this.props.handleSideMenu(!this.props.showSideMenu)
+  }
   onClickMenu (ev) {
     if (this.props.handleClick) {
       this.props.handleClick(ev.currentTarget.dataset.headerItem, this.props.history)
@@ -63,6 +68,22 @@ class Header extends React.Component {
     }    
     let groupLinksRightSide = []
     let groupLinksLeftSide = []
+    if (this.state.viewSelected === constants.VIEW.LIST) {
+      const classSideMenu = classNames(
+        styles.icon,
+        {
+          [styles.sideIconMenuShow]: !this.props.showSideMenu
+        },
+        {
+          [styles.sideIconMenuHide]: this.props.showSideMenu
+        }
+      )
+      groupLinksLeftSide.push(
+        <div key={constants.ICON.TYPE.MENU} data-header-item={constants.ICON.TYPE.MENU} className={classSideMenu} onClick={this.onClickSideMenu}>
+          <Icon type={constants.ICON.TYPE.MENU} color={constants.ICON.COLOR.BLACK} />
+        </div>       
+      )
+    }
     const { OPTIONS } = locale
     if ([constants.VIEW.CART, constants.VIEW.DETAIL].includes(this.state.viewSelected)) {
       groupLinksLeftSide.push(
@@ -93,12 +114,14 @@ class Header extends React.Component {
         </div>
       )    
     }
+    const classHeader = this.state.viewSelected && this.state.viewSelected.toLowerCase() === constants.VIEW.HOME ? styles.homeHeader : styles.mainHeader
+
     return (
       <div>
         <header className={styles.header}>
           {locale.TITLE}
         </header>
-        <div className={styles.mainHeader}>
+        <div className={classHeader}>
           <div className={styles.mainHeaderLeftSide}>
             {groupLinksLeftSide}
           </div>
@@ -114,7 +137,9 @@ class Header extends React.Component {
 
 Header.propTypes = {
   viewSelected: PropTypes.string,
-  handleClick: PropTypes.func
+  handleClick: PropTypes.func,
+  showSideMenu: PropTypes.bool,
+  handleSideMenu: PropTypes.func
 }
 
 export default Header
