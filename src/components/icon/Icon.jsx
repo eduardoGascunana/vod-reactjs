@@ -34,10 +34,6 @@ class Icon extends React.Component {
       {
         [styles.white]: this.props.color !== constants.ICON.COLOR.BLACK
       }
-      /* 
-        TO-DO no funciona ¿?¿?¿?
-      */
-      // { [`styles.${this.state.color}`]: true }
     )
     return(
       <div onClick={this.onClick}>

@@ -9,29 +9,4 @@
 }
 .itemSelected {
   background-color: orange;
-}      
-/* @media (min-width:320px) and (max-width: 480px) {
-  :host {
-    font-size: 14px; 
-  }             
-}       
-@media (min-width: 481px) and (max-width: 641px) {
-  :host {
-    font-size: 14px; 
-  }            
 }
-@media (min-width: 641px) and (max-width: 767px) {
-  :host {
-    font-size: 16px; 
-  } 
-}
-@media (min-width : 768px) and (max-width : 1024px) {
-  :host {
-    font-size: 16px; 
-  } 
-}
-@media (min-width: 1024px) {            
-  :host {
-    font-size: 16px; 
-  } 
-} */

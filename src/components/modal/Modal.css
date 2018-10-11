@@ -42,7 +42,6 @@
   width: 100%;
   text-align: center;
 }
-/* ::content .modalButton { */
 .modalButton {
   background-color: #172C50;
   border: none;
@@ -54,7 +53,6 @@
   margin-bottom: 5px;
 }
 @media (min-width: 481px) and (max-width: 641px) {
-  /* ::content .modalButton { */
   ::content .modalButton {
     width: 40%;
     margin: auto;

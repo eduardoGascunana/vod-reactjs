@@ -30,7 +30,6 @@ class List extends React.Component {
       }) 
     return (
       <section className={styles.list}>
-      {/* <section className={styles.list} style$="display: {{styleSection}}"> */}
         {listCover}
       </section>     
     )
