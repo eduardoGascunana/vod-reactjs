@@ -1,4 +1,10 @@
 const constants = {
+  ROUTE: {
+    HOME: '(/home|/)',
+    LIST: '/list/:category',
+    DETAIL: '/detail/:category/:id',
+    CART: '/cart'
+  },
   VIEW: {
     DETAIL: 'detail',
     CART: 'cart',

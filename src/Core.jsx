@@ -56,7 +56,7 @@ class Core extends React.Component {
         movies = response  
         return this.cartModel.get()
       })
-      .then(response => {      
+      .then(response => {    
         this.setState({
           viewSelected: constants.CATEGORY_INIT,
           movies: this.completeInfoMovies(movies, constants.CATEGORY_INIT, response),
@@ -186,6 +186,7 @@ class Core extends React.Component {
     })
   }
   render () {
+    const {ROUTE} = constants
     return (
       <main className={styles.main} >
         <BrowserRouter>
@@ -200,14 +201,14 @@ class Core extends React.Component {
               />        
             )}/>
             <Switch>
-              <Route path='(/home|/)' render={props => (
+              <Route path={ROUTE.HOME} render={props => (
                 <ViewHome
                   {...props}
                   movies={this.state.movies}
                   handleClickAccess={this.onClickAccess}
                 />
               )} />
-              <Route path='/list/:category' render={props => (
+              <Route path={ROUTE.LIST} render={props => (
                 <ViewList 
                   {...props} 
                   movies={$.extend(true, [], this.state.movies)} 
@@ -221,7 +222,7 @@ class Core extends React.Component {
                   handleSideMenu={this.onSideMenu}
                 />
               )}/>
-              <Route path='/detail/:category/:id' render={props => (
+              <Route path={ROUTE.DETAIL} render={props => (
                 <ViewDetail
                   {...props}
                   data={this.state.infoDetail}
@@ -229,7 +230,7 @@ class Core extends React.Component {
                   handleClickRating={this.onClickRating}  
                 />              
               )}/>
-              <Route path='/cart' render={props => (
+              <Route path={ROUTE.CART} render={props => (
                 <ViewCart
                   {...props}
                   data={this.state.cart}
