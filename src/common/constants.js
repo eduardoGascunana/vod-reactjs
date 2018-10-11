@@ -14,6 +14,7 @@ const constants = {
       CART: 'cart',
       EXIT: 'exit',
       DELETE: 'delete',
+      MENU: 'menu',
       ADD_TO_CART: 'addToCart',
       REMOVE_TO_CART: 'removeToCart'
     }    
