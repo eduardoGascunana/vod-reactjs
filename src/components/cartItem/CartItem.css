@@ -39,27 +39,24 @@
   .cartItem {
     display: inline;
     flex-direction: row;
-  };
-  .cart-item-cover {
+  }
+  .cartItemCover {
     text-align: center;
   }
-  .cart-item-info-wraper-end {
+  .cartItemInfoWraperEnd {
     margin-bottom: 15px;
   }
 }
 @media (min-width: 768px) {
-  #idImg {
+  .cartItemImage {
     height: 190px;
   }
 }
 @media (max-width : 768px) {
-  :host {
-    font-size: 16px; 
-  }
   .cartItemInfo {
     align-content: center;
   }
-  cartItemTitle {
+  .cartItemTitle {
     width: 100%;
   }
   .cartItemInfoWraperEnd {

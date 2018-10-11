@@ -27,7 +27,7 @@ class CartItem extends React.Component {
     return (
       <div className={styles.cartItem}>
         <div className={styles.cartItemCover}>
-          <img src={imgPath} alt={data.name} />                            
+          <img className={styles.cartItemImage} src={imgPath} alt={data.name} />                            
         </div>
         <div className={styles.cartItemInfo}>
           <div className={styles.cartItemTitle}>
