@@ -8,6 +8,11 @@ const utils = {
         ? txt
         : utils.locale.format(txt.replace(regExp, key), keys)
     }
+  },
+  getProp(obj, key) {
+    key.split('.').reduce((o, x) =>
+      (typeof o === "undefined" || o === null) ? o : o[x]
+      , obj);
   }
 }
 
