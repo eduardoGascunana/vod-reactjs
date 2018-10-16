@@ -40,6 +40,7 @@
     "react-dom": "^16.2.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.0.5",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
@@ -53,7 +54,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"    
+    "deploy": "gh-pages -b master -d build"
   },
   "jest": {
     "collectCoverageFrom": [

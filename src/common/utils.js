@@ -1,6 +1,5 @@
 const regExp = /_\$\$_/
 
-
 const utils = {
   locale: {
     symbol: '_$$_',
