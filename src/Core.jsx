@@ -189,7 +189,7 @@ class Core extends React.Component {
     const {ROUTE} = constants
     return (
       <main className={styles.main} >
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <div>
             <Route render={props => (
               <Header
