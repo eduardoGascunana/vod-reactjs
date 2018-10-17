@@ -1,0 +1,83 @@
+.container{
+  display: flex;
+  width: 95%;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  text-align: center;
+  margin: 25px auto;
+}
+.containerImg{
+  order: 1;
+  width: 100%;
+}
+.img {
+  max-width: 100%;
+  height: auto;
+}
+.btn {
+  order: 2;
+  width: 100%;
+  margin: 20px 0px;
+}
+.btnCart {
+  background-color: #172C50;
+  border: none;
+  color: white;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+  cursor: pointer;
+}
+.detail {
+  order: 3;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+.rowDetail {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
+}
+.col1{
+  font-size: 16px;
+  text-align: left;
+  width: 50%;
+}
+.col2{
+  font-size: 16px;
+  width: 50%;
+  text-align: left;
+}
+.synopsis {
+  order: 4;
+  text-align: left;
+  margin-top: 10px;
+}
+@media (min-width: 481px) {
+  container {
+    width: 70%;
+  }
+  .detail {
+    order: 2;
+    width: 50%;
+  }
+  .containerImg{
+    order: 1;
+    width: auto;
+  }
+  .synopsis {
+    order: 3;
+  }
+  .btn {
+    order: 4;
+  }
+}
+@media (min-width: 767px) {
+  .btn {
+    margin: 20px 20%;
+  }
+}

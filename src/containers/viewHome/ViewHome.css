@@ -1,0 +1,53 @@
+.home {
+  width: 100%
+}
+.homeList {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+}           
+.homeListCovers {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  width: 100%;
+} 
+.homeListCover {
+  width: calc(16.5% - 10px);
+  margin: 5px;
+}
+.homeListTitle {
+  font-size: 18px;
+  width: 100%;
+}
+.homeListCover {
+  width: calc(16.5% - 10px);
+  margin: 5px;
+}
+.homeListBtn {
+  margin: 20px 5%;
+}  
+.btnCart {
+  background-color: #172C50;
+  border: none;
+  color: white;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+  cursor: pointer;
+}          
+@media (min-width: 767px) {
+  .home {
+    width: 85%;
+    margin: 0 auto;
+  }
+  .homeListBtn {
+    margin: 20px 30%;
+  }
+}
