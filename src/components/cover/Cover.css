@@ -1,0 +1,119 @@
+.cover {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  background-size: contain;
+  background-position: center;
+  z-index: 1;
+  margin: 5px;
+}
+.coverDetail {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  bottom: 5px;
+  height: 78px;
+  z-index: 100;
+  display: none;
+}
+.coverDetailBottom {
+  width: 100%;
+}
+.coverDetailTitle {
+  color: black;
+  padding: 5px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.coverDetailRow {
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.coverDetailRowPrice {
+  color: black;
+  float: left;
+}
+.coverDetailRowIcon {
+  float: right;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.coverCursor {
+  cursor: pointer;
+}
+.coverDetailRating {
+  padding-left: 5px;
+}
+.coverIconAdd {
+  color: white;
+  fill: white;
+  stroke: none;
+  width: 24px;
+  height: 24px;
+}
+.hidden {
+  visibility: hidden;
+}
+.visible {
+  visibility: visible;
+}
+@media (min-width: 1024px) {
+  .coverDetailBottom {
+    display: none;
+  }
+  .coverDetail {
+    display: block;
+  }
+  .coverDetailTitle {
+    color: white;
+    padding: 5px;
+  }
+  .coverDetailRowPrice {
+    color: white;
+    padding-left: 5px;
+  }
+}
+@media (min-width:320px) and (max-width: 480px) {
+  .cover {
+    width: calc(33.3% - 10px);
+    font-size: 10px;
+  }
+}
+@media (min-width: 481px) and (max-width: 641px) {
+  .cover {
+    width: calc(25% - 10px);
+    font-size: 10px;
+  }
+}
+@media (min-width: 641px) and (max-width: 767px) {
+  .cover {
+    width: calc(20% - 10px);
+    font-size: 12px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .cover {
+    width: calc(20% - 10px);
+    font-size: 12px;
+  }
+  .coverDetailRowPrice {
+    font-weight: bold;
+  }
+}
+@media (min-width: 1024px) {
+  .cover {
+    width: calc(16.5% - 10px);
+    font-size: 13px;
+  }
+  .coverDetailRowPrice {
+    font-weight: bold;
+  }
+}

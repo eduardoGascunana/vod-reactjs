@@ -1,0 +1,52 @@
+.header {
+  font-size: 25px;
+  font-family: Orbitron;
+  text-align: left;
+  margin: 5px;
+  cursor: pointer;
+}
+.homeHeader {
+  border-bottom: 1px solid black;
+}
+.mainHeader {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background-color: #d9d9d9;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 10px;
+}
+.mainHeaderRightSide {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+}
+.mainHeaderLeftSide {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+.sideIconMenuHide {
+  display: none;
+}
+.sideIconMenuShow {
+  display: block;
+}
+.txtBtn {
+  display: none;
+}
+@media (min-width: 767px) {      
+  .sideIconMenuShow {
+    display: none;
+  }
+  .txtBtn {
+    display: block;
+  }        
+}

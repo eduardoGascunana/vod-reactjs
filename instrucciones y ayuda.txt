@@ -1,0 +1,156 @@
+* create-react-app
+    https://github.com/facebook/create-react-app
+    
+    descargar devtools de react: https://reactjs.org/blog/2015/09/02/new-react-developer-tools.html#installation
+
+    actualizar npm (ubuntu): sudo npm install -g npm
+    para versiones de npm:
+        - superiores a 5.2: npx create-react-app nombre_proyecto
+        - inferiores a 5.2: npm install -g create-react-app
+                            create-react-app nombre_proyecto
+
+    npm start o yarn start:
+        - levanta el servidor (localhost:3000)
+        - construye el bundle y lo añade al body del index.html
+        - reload cuando se realiza un cambio (watcher)
+
+    npm test
+
+* probar el "build" en local
+
+    - git checkout master
+    - quitar de package.json la linea "homepage": "https://eduardogascunana.github.io/vod-reactjs",
+    - npm run build
+    - yarn global add serve
+    - serve -s build
+
+* probar proyecto gh-pages en GitHub
+
+    https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#github-pages
+
+    - crear rama gh-pages en mi repositorio de GitHub
+    - git checkout gh-pages (importante, porque sino se subiria lo siguiente a master)
+    - npm install --save gh-pages
+    - añadir a package.json: 
+        * la linea "homepage": "https://eduardogascunana.github.io/vod-reactjs",
+        * añadir a scripts:
+            "predeploy": "npm run build",
+            "deploy": "gh-pages -d build"
+    - ejecutar npm run deploy
+
+* modulos css
+    https://medium.com/nulogy/how-to-use-css-modules-with-create-react-app-9e44bec2b5c2
+    https://www.javascriptstuff.com/css-modules-by-example/
+
+    antes de ejecutar yarn test hay que instalar el gestor de paquetes yarn (similar a npm):
+        - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+        - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+        - sudo apt-get update && sudo apt-get install yarn
+    
+    ejecutar yarn test y se crearan las carpetas config y scripts
+
+    en webpack.config.dev.js y webpack.config.prod.js buscar la cadena "require.resolve('css-loader')" y añadir:
+        modules: true,
+        localIdentName: "[name]__[local]___[hash:base64:5]"  
+
+    instalacion del paquete classnames:
+        https://github.com/JedWatson/classnames   
+
+* peticiones XHR
+    instalar la libreria "whatwg-fetch" que es una implementación del standar "fetch"
+    npm install --save whatwg-fetch
+
+    en Desarrollo sólo es posible que devuelva .json locales si están ubicados en la carpeta /public y no en /src
+
+* routing
+    yarn add react-router-dom
+    No funciona instalandolo con npm install --save react-router-dom
+
+    https://scotch.io/tutorials/routing-react-apps-the-complete-guide
+
+* clases ES6
+    http://www.etnassoft.com/2016/12/02/introduccion-a-la-poo-en-javascript-moderno-las-nuevas-clases-en-es6/
+
+* solucion a copiar por valor, no por referencia, objetos, arrays y arrays de objetos   
+    copia de arrays simples (sin objetos):
+        - Array.from(a)
+
+    copia de objetos simples (sin objetos hijos):
+        - Object.assign(a)
+        - Object.create(a)
+
+    copia de arrays de objetos:
+        - $.extend(true, [], a)
+        - JSON.parse(JSON.stringify(a))
+
+    copia de objetos complejos (con objetos hijos)
+        - $.extend(true, {}, a)
+        - JSON.parse(JSON.stringify(a))
+
+    https://medium.com/@gamshan001/javascript-deep-copy-for-array-and-object-97e3d4bc401a
+
+* comparar objetos
+
+    JSON.stringify() convierte objetos a cadena
+        funciona en la mayoria de los casos pero tiene importantes inconvenientes:
+            - las propiedades de los objetos no se muestra en orden alfabético -> se pueden producir diferencias por el orden en el que han sido creadas
+            - solo se incluyen las propiedades enumerables del objeto (puede ser algo limitado en algunos casos)
+            - no funciona con objetos con referencias circulares
+            - es bastante lento:
+                * serializa los objetos
+                * comparación completa de una cadena
+
+        JSON.stringify({a: 1, b: 2}) === JSON.stringify({b: 2, a: 1}) devuelve falso porque el orden en que están declaradas las propiedades es diferente
+    
+    Solución -> crear una función recursiva que vaya comparando todos los objetos hijos tambien o usar https://github.com/todojs/esequal
+
+    https://www.todojs.com/comparacion-objetos-javascript/
+
+
+------------------------------------------------------------------------
+
+* diagrama ciclo de vida (con ciclos de vida menos comunes)
+    http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+* ciclo de vida:
+    componentWillMount(): Es un método muy sencillo de comprender. Sólo se ejecuta antes de que el componente sea montado en el DOM.
+
+    componentDidMount(): Este método solo se ejecuta justo después de que el componente haya sido montado en el DOM.
+
+    componentWillReceiveProps(): Este método no se ejecutará una vez se monte el componente, si no que se esperará a recibir nuevas props de un componente padre para ejecutarse.
+
+    componentWillUpdate(): Muy similar a componentWillReceiveProp solo que se ejecuta justo antes del render, cuando nuestros props o estados han sido recibidos.
+
+    shouldComponentUpdate(): Se ejecuta de la misma forma que el anterior. Con este método podremos mejorar nuestra performance. Por defecto, siempre retorna true.
+
+    componentDidUpdate(): Es invocado inmediatamente después de que el componente se haya actualizado.
+
+    componentWillUnmount(): Este metodo se ejecuta justo antes de que el componente sea destruido o eliminado del DOM.
+
+* ejecucion del ciclo de vida:
+    - Creación de un componente:
+        Se ejecuta el método constructor()
+        Para unos casos raros y excepcionales se puede ejecutar static getDerivedStateFromProps()
+        Se ejecuta el método componentWillMount() (renombrado por "deprecated" a UNSAFE_componentWillMount(). Debe evitarse usarlo)
+        Se renderiza y se monta el componente en el DOM
+        Se ejecuta el método componentDidMount()
+
+    - Actualización de un componente (por un cambio en una prop o state):
+        Para unos casos raros y excepcionales se puede ejecutar static getDerivedStateFromProps()
+        Se ejecuta el método shouldComponentUpdate()
+        Se ejecuta el método componentWillReceiveProps si recibe nuevas props.(renombrado por "deprecated" a UNSAFE_componentWillReceiveProps(). Debe evitarse usarlo)
+        Se ejecuta el método componentWillUpdate antes de volver a renderizar.(renombrado por "deprecated" a UNSAFE_componentWillUpdate(). Debe evitarse usarlo)
+        Se actualiza el componente y se renderiza en el DOM
+        Para obtener informacion del DOM, como posiciones de scroll, puede usarse getSnapshotBeforeUpdate()
+        Se ejecuta el método componentDidUpdate() una vez este el componente renderizado.
+
+    - Destrucción de un componente:
+        Se dispara el método componentWillUnmount() antes de que se destruya el componente
+        El componente es destruido y eliminado del DOM
+
+    - Manejo de errores
+        Se dispara el método componentDidCatch()
+
+
+  
+

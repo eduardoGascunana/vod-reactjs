@@ -1,0 +1,14 @@
+.rating {
+  overflow: hidden;
+  display: inline-block;
+}
+.ratingStar {
+  display: block;
+  float: right;
+  width: 16px;
+  height: 16px;
+  background: url("../../common/images/star.png") 0 -16px;
+}
+.starActive {
+  background-position: 0 0;
+}
