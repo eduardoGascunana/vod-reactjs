@@ -30,7 +30,7 @@ const constants = {
     EXTENSION: '.json'
   },
   CATEGORY_INIT: 'Home',
-  CATEGORY_INIT_LIST: 'adventure'
+  CATEGORY_INIT_LIST: 'Adventure'
 }
 
 export default constants
