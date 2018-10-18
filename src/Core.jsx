@@ -17,6 +17,7 @@ import ViewList from './containers/viewList/ViewList'
 import ViewDetail from './containers/viewDetail/ViewDetail';
 import ViewCart from './containers/viewCart/ViewCart';
 import constants from './common/constants.js'
+import utils from './common/utils.js'
 
 class Core extends React.Component {
   constructor (props) {
@@ -68,7 +69,11 @@ class Core extends React.Component {
   }
   componentDidUpdate () {
     window.onpopstate = (ev) => {
-      const pathName = ev.currentTarget.location.pathname.split('/')
+      const path = ev.currentTarget.location.pathname
+      const pathName = (utils.getProp(process, 'env.PUBLIC_URL') && path.includes(process.env.PUBLIC_URL)
+        ? path.slice(process.env.PUBLIC_URL.length)
+        : path)
+          .split('/')
       if (this.state.viewSelected === pathName[1] && this.state.category !== pathName[2]) {
         this.moviesModel.getItems(pathName[2])
           .then(response => {
