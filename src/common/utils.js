@@ -10,9 +10,9 @@ const utils = {
     }
   },
   getProp(obj, key) {
-    key.split('.').reduce((o, x) =>
-      (typeof o === "undefined" || o === null) ? o : o[x]
-      , obj);
+    return key.split('.').reduce((acum, current) => {
+      return typeof acum === "undefined" || acum === null ? acum : acum[current]
+      }, obj);
   }
 }
 
