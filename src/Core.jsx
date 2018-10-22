@@ -70,10 +70,10 @@ class Core extends React.Component {
   componentDidUpdate () {
     window.onpopstate = (ev) => {
       const path = ev.currentTarget.location.pathname
-      const pathName = (utils.getProp(process, 'env.PUBLIC_URL') && path.includes(process.env.PUBLIC_URL)
+      let pathName = utils.getProp(process, 'env.PUBLIC_URL') && path.includes(process.env.PUBLIC_URL)
         ? path.slice(process.env.PUBLIC_URL.length)
-        : path)
-          .split('/')
+        : path
+      pathName = pathName.split('/')
       if (this.state.viewSelected === pathName[1] && this.state.category !== pathName[2]) {
         this.moviesModel.getItems(pathName[2])
           .then(response => {
