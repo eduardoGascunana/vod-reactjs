@@ -17,7 +17,6 @@ import ViewList from './containers/viewList/ViewList'
 import ViewDetail from './containers/viewDetail/ViewDetail';
 import ViewCart from './containers/viewCart/ViewCart';
 import constants from './common/constants.js'
-import utils from './common/utils.js'
 
 class Core extends React.Component {
   constructor (props) {
@@ -70,7 +69,7 @@ class Core extends React.Component {
   componentDidUpdate () {
     window.onpopstate = (ev) => {
       const path = ev.currentTarget.location.pathname
-      let pathName = utils.getProp(process, 'env.PUBLIC_URL') && path.includes(process.env.PUBLIC_URL)
+      let pathName = process.env && process.env.PUBLIC_URL && path.includes(process.env.PUBLIC_URL)
         ? path.slice(process.env.PUBLIC_URL.length)
         : path
       pathName = pathName.split('/')
