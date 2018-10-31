@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './List.css'
 import Cover from '../cover/Cover'
+import IconLoading from '../iconLoading/IconLoading'
 
 class List extends React.Component {
   constructor (props) {
@@ -20,17 +21,22 @@ class List extends React.Component {
     this.props.handleClickRating && this.props.handleClickRating(info)
   }  
   render () {
-    let listCover = this.props.data.map((item, index) => {
-      return <Cover 
-        key={index} 
-        data={item} 
-        handleClick={this.onClickCover} 
-        handleClickIconCart={this.onClickIconCart} 
-        handleClickRating={this.onClickRating}/>
-      }) 
+    let content
+    if (this.props.loading) {
+      content = <IconLoading></IconLoading>
+    } else {    
+      content = this.props.data.map((item, index) => {
+        return <Cover 
+          key={index} 
+          data={item} 
+          handleClick={this.onClickCover} 
+          handleClickIconCart={this.onClickIconCart} 
+          handleClickRating={this.onClickRating}/>
+        }) 
+    }
     return (
       <section className={styles.list}>
-        {listCover}
+        {content}
       </section>     
     )
   }

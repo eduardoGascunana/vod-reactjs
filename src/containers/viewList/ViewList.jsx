@@ -49,7 +49,8 @@ class ViewList extends React.Component {
             handleClickMenuItem={this.onClickMenuItem} />
         </div>
         <div className={styles.list}>
-          <List            
+          <List          
+            loading={this.props.loading}  
             data={this.props.movies}
             handleClickCover={this.onClickCover}
             handleClickIconCart={this.onClickIconCart}

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './ViewCart.css'
 import CartItem from '../../components/cartItem/CartItem'
+import IconLoading from '../../components/iconLoading/IconLoading'
 import Modal from '../../components/modal/Modal'
 import utils  from '../../common/utils'
 import locale from '../../common/locale.js'
@@ -53,64 +54,73 @@ class ViewCart extends React.Component {
     }, 0)    
   }
   render () {
-    let body = null
-    let txtHeader = locale.VIEW_CART.HEADER
-    if (this.props.data.length === 0) {
-      txtHeader += locale.VIEW_CART.HEADER_EMPTY
+    let content
+    if (this.props.loading) {
+      content = <IconLoading></IconLoading>
     } else {
-      let listCart = this.props.data.map((item, index) => {
-        return <CartItem
-          key={index}
-          data={item}
-          handleClickDelete={this.onClickDelete} />
-      })
-      let modal = null
-      if (this.state.showModalEmpty) {
-        modal = <Modal 
-          header={locale.VIEW_CART.MODAL_EMPTY.HEADER}
-          body={locale.VIEW_CART.MODAL_EMPTY.BODY}
-          options={[locale.YES, locale.NOT]}
-          handle={this.onClickEmptyCartModal}
-        />
-      } else if (this.state.showModalBuy) {
-        modal = <Modal 
-          header={locale.VIEW_CART.MODAL_BUY.HEADER}
-          body={localeUtils.format(locale.VIEW_CART.MODAL_BUY.BODY, [this.props.data.length])}
-          options={[locale.ACCEPT]}
-          handle={this.onClickBuyCartModal}
-        />   
-      }   
-      body = 
-        <div>
-          <div className={styles.cartNumElements}>
-            {this.props.data.length} elements
-          </div>
-          <br></br>
-          <div className={styles.cartList}>
-            <div className={styles.cartListItems}>
-              {listCart}
+      let body = null
+      let txtHeader = locale.VIEW_CART.HEADER
+      if (this.props.data.length === 0) {
+        txtHeader += locale.VIEW_CART.HEADER_EMPTY
+      } else {
+        let listCart = this.props.data.map((item, index) => {
+          return <CartItem
+            key={index}
+            data={item}
+            handleClickDelete={this.onClickDelete} />
+        })
+        let modal = null
+        if (this.state.showModalEmpty) {
+          modal = <Modal 
+            header={locale.VIEW_CART.MODAL_EMPTY.HEADER}
+            body={locale.VIEW_CART.MODAL_EMPTY.BODY}
+            options={[locale.YES, locale.NOT]}
+            handle={this.onClickEmptyCartModal}
+          />
+        } else if (this.state.showModalBuy) {
+          modal = <Modal 
+            header={locale.VIEW_CART.MODAL_BUY.HEADER}
+            body={localeUtils.format(locale.VIEW_CART.MODAL_BUY.BODY, [this.props.data.length])}
+            options={[locale.ACCEPT]}
+            handle={this.onClickBuyCartModal}
+          />   
+        }   
+        body = 
+          <div>
+            <div className={styles.cartNumElements}>
+              {this.props.data.length} elements
             </div>
-            <div className={styles.cartListSummary}>
-              <div className={styles.cartListSummaryTotal}>
-                {localeUtils.format(locale.VIEW_CART.TOTAL, [this.getTotalAmount()])}
+            <br></br>
+            <div className={styles.cartList}>
+              <div className={styles.cartListItems}>
+                {listCart}
               </div>
-              <button className={styles.cartBtnBuy} onClick={this.onClickBuy}>
-                {locale.BUY}
-              </button>
-              <button className={styles.cartBtnEmpty} onClick={this.onClickEmpty}>
-              {locale.EMPTY}
-              </button>
+              <div className={styles.cartListSummary}>
+                <div className={styles.cartListSummaryTotal}>
+                  {localeUtils.format(locale.VIEW_CART.TOTAL, [this.getTotalAmount()])}
+                </div>
+                <button className={styles.cartBtnBuy} onClick={this.onClickBuy}>
+                  {locale.BUY}
+                </button>
+                <button className={styles.cartBtnEmpty} onClick={this.onClickEmpty}>
+                {locale.EMPTY}
+                </button>
+              </div>
             </div>
+            {modal}
           </div>
-          {modal}
-        </div>
+        content = 
+          <div>
+            <div className={styles.cartHeader}>
+              {txtHeader}
+            </div>
+            {body}
+          </div>        
+      }
     }
     return (
       <section className={styles.cart}>
-        <div className={styles.cartHeader}>
-          {txtHeader}
-        </div>      
-        {body}
+        {content}
       </section>
     )
   }

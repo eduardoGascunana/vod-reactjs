@@ -28,7 +28,8 @@ class Core extends React.Component {
       categories: [],
       infoDetail: null,
       cart: [],
-      showSideMenu: false
+      showSideMenu: false,
+      loading: true
     }
     this.moviesModel = new MoviesModel()
     this.categoriesModel = new CategoriesModel()
@@ -62,29 +63,45 @@ class Core extends React.Component {
           movies: this.completeInfoMovies(movies, constants.CATEGORY_INIT, response),
           categories: categories,
           category: constants.CATEGORY_INIT,
-          cart: response
+          cart: response,
+          loading: false
         })              
       })
   }
   componentDidUpdate () {
     window.onpopstate = (ev) => {
+      this.setState({
+        loading: true
+      })
       const path = ev.currentTarget.location.pathname
       let pathName = process.env && process.env.PUBLIC_URL && path.includes(process.env.PUBLIC_URL)
         ? path.slice(process.env.PUBLIC_URL.length)
         : path
       pathName = pathName.split('/')
-      if (this.state.viewSelected === pathName[1] && this.state.category !== pathName[2]) {
+      if ((pathName[0] === '' && pathName[1] === '') || pathName[1] === constants.VIEW.HOME) {
+        this.moviesModel.getItems(constants.CATEGORY_INIT)
+          .then(response => {
+            this.setState({
+              viewSelected: constants.CATEGORY_INIT,
+              movies: this.completeInfoMovies(response, this.state.category, this.state.cart),
+              category: pathName[2],
+              loading: false
+            })
+          })        
+      } else if (this.state.viewSelected === pathName[1] && this.state.category !== pathName[2]) {
         this.moviesModel.getItems(pathName[2])
           .then(response => {
             this.setState({
               movies: this.completeInfoMovies(response, this.state.category, this.state.cart),
-              category: pathName[2]
+              category: pathName[2],
+              loading: false
             })
           })
       } else {
         this.setState({
           viewSelected: pathName[1],
-          category: pathName[2]
+          category: pathName[2],
+          loading: false
         })
       }
     }
@@ -105,38 +122,51 @@ class Core extends React.Component {
     })
   }
   onClickMenuItem (index, history) {
+    this.setState({
+      loading: true
+    })
     const name = this.categoriesModel.getNameCategory(index)
     this.moviesModel.getItems(name)
       .then(response => {       
         this.setState({
           movies: this.completeInfoMovies(response, this.state.category, this.state.cart),
-          category: name
+          category: name,
+          loading: false
         })
         history.push(`/${constants.VIEW.LIST}/${name}`)                
       })
   }
   onClickHeaderItem (view, history) {
+    this.setState({
+      loading: true
+    })      
     if (view === constants.VIEW.HOME) {
       this.moviesModel.getItems(constants.CATEGORY_INIT)
         .then(response => {
           this.setState({
             viewSelected: view,
             movies: response,
-            category: constants.CATEGORY_INIT
+            category: constants.CATEGORY_INIT,
+            loading: false
           })
           history.push(`/${view}`)
         })       
     } else {
       this.setState({
-        viewSelected: view
+        viewSelected: view,
+        loading: false
       })
       history.push(`/${view}/`)      
     }
   }
   onClickCover (info, history) {
     this.setState({
+      loading: true
+    })    
+    this.setState({
       viewSelected: constants.VIEW.DETAIL,
-      infoDetail: info
+      infoDetail: info,
+      loading: false
     })
     history.push(`/${constants.VIEW.DETAIL}/${info.nameCategory}/${info.id}`)
   }
@@ -155,7 +185,7 @@ class Core extends React.Component {
   onClickRating (info) {
     this.moviesModel.modifyRate(info)
   }    
-  onClickIconDelete (info) {
+  onClickIconDelete (info) {  
     this.cartModel.delete(info)
       .then(response => {        
         this.setState({
@@ -164,7 +194,7 @@ class Core extends React.Component {
         })        
       })
   }
-  onClickEmptyCart () {
+  onClickEmptyCart () { 
     this.cartModel.allDelete()
       .then(response => {
         this.setState({
@@ -174,13 +204,17 @@ class Core extends React.Component {
       })
   }
   onClickAccess (info, history) {
+    this.setState({
+      loading: true
+    })    
     this.moviesModel.getItems(info.category)
       .then(response => {
-        history.push(`/${info.view}/${info.category}`)        
+        history.push(`/${info.view}/${info.category}`)      
         this.setState({
           viewSelected: info.view,
           movies: this.completeInfoMovies(response, info.category, this.state.cart),
-          category: info.category
+          category: info.category,
+          loading: false
         }) 
       })   
   }
@@ -208,13 +242,15 @@ class Core extends React.Component {
               <Route path={ROUTE.HOME} render={props => (
                 <ViewHome
                   {...props}
+                  loading={this.state.loading}
                   movies={this.state.movies}
                   handleClickAccess={this.onClickAccess}
                 />
               )} />
               <Route path={ROUTE.LIST} render={props => (
                 <ViewList 
-                  {...props} 
+                  {...props}
+                  loading={this.state.loading}
                   movies={$.extend(true, [], this.state.movies)} 
                   categories={this.state.categories}
                   categorySelected={this.state.category}
@@ -229,6 +265,7 @@ class Core extends React.Component {
               <Route path={ROUTE.DETAIL} render={props => (
                 <ViewDetail
                   {...props}
+                  loading={this.state.loading}
                   data={this.state.infoDetail}
                   handleClickIconCart={this.onClickIconCart}
                   handleClickRating={this.onClickRating}  
@@ -237,6 +274,7 @@ class Core extends React.Component {
               <Route path={ROUTE.CART} render={props => (
                 <ViewCart
                   {...props}
+                  loading={this.state.loading}
                   data={this.state.cart}
                   handleClickIconDelete={this.onClickIconDelete}   
                   handleClickEmptyCart={this.onClickEmptyCart}   
