@@ -246,6 +246,21 @@ footer > a {
 }.Img__size___2OOhM {
   max-width: 100%;
   height: auto;
+} .IconLoading__spinner___3k3ha {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  height: 100%;
+  width: 100%;
+ }
+ .IconLoading__container___Z4Ze3 {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: center;
+      justify-content: center;
 }.ViewList__container___2dJIq{
   display: -ms-flexbox;
   display: flex;
@@ -781,4 +796,4 @@ img {
     margin-top: 15px;                  
   }
 }
-/*# sourceMappingURL=main.5fbddd3a.css.map*/
+/*# sourceMappingURL=main.e6586c9f.css.map*/

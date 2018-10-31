@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.5fbddd3a.css",
-  "main.css.map": "static/css/main.5fbddd3a.css.map",
-  "main.js": "static/js/main.08ad8f76.js",
-  "main.js.map": "static/js/main.08ad8f76.js.map",
+  "main.css": "static/css/main.e6586c9f.css",
+  "main.css.map": "static/css/main.e6586c9f.css.map",
+  "main.js": "static/js/main.3e9e26f8.js",
+  "main.js.map": "static/js/main.3e9e26f8.js.map",
   "static/media/12 Rounds.jpg": "static/media/12 Rounds.b2816fbf.jpg",
   "static/media/20th Century Women.jpg": "static/media/20th Century Women.675ef223.jpg",
   "static/media/A Cure for Wellness.jpg": "static/media/A Cure for Wellness.4a741216.jpg",
@@ -249,5 +249,6 @@
   "static/media/XX.jpg": "static/media/XX.fc612b16.jpg",
   "static/media/Youth in Revolt.jpg": "static/media/Youth in Revolt.c28c6d45.jpg",
   "static/media/default.jpg": "static/media/default.867d56ce.jpg",
+  "static/media/loading.gif": "static/media/loading.f4404720.gif",
   "static/media/xXx_ Return of Xander Cage.jpg": "static/media/xXx_ Return of Xander Cage.9ad3bade.jpg"
 }
