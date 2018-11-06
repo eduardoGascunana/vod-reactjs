@@ -45,6 +45,6 @@ create-react-app name_project
 ### CSS-Modules
 npm run eject
 In webpack.config.dev.js and webpack.config.prod.js search "require.resolve('css-loader')" and add:
-  modules: true,
-  localIdentName: "[name]__[local]__[hash:base64:5]"
+* modules: true,
+* localIdentName: "[name]__[local]__[hash:base64:5]"
 
