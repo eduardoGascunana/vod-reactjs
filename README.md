@@ -1,3 +1,5 @@
+# cra + react + react-router + css-modules
+
 Simulates a Video-On-Demand front site distributed in:
 * Home
 * Categories menu and filtered list
