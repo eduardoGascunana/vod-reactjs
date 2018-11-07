@@ -5,6 +5,7 @@ Simulates a Video-On-Demand front site distributed in:
 * Categories menu and filtered list
 * Detail
 * Cart
+
 ```bash
 index.js
 ├── Core.jsx 
@@ -35,16 +36,28 @@ index.js
 │   ├── Categories.js
 │   ├── Cart.js
 ```
-### Responsive Web Design
-It shows changes in lists and categories menu according device resolution
 
 ### Install create-react-app
-npm install -g create-react-app
-create-react-app name_project
+## npm
+npm install -g create-react-app 
+create-react-app my-app
+## npx
+npx create-react-app my-app
+
+### Start
+npm start or yarn start
+http://localhost:3000/
+
+### Build
+npm run build or yarn build
+Builds the app for production to the build folder
 
 ### CSS-Modules
 npm run eject
 In webpack.config.dev.js and webpack.config.prod.js search "require.resolve('css-loader')" and add:
 * modules: true,
-* localIdentName: "[name]__[local]__[hash:base64:5]"
+* localIdentName: "[name]__[local]___[hash:base64:5]"
+
+### Responsive Web Design
+It shows changes in lists and categories menu according device resolution
 
