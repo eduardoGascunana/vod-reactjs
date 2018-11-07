@@ -46,13 +46,13 @@ npx create-react-app my-app
 
 ## Start
 ### development
-npm start or yarn start 
-http://localhost:3000/
+npm start or yarn start  
+http://localhost:3000/  
 ### production
-yarn global add server (if not installed) 
-remove key "homepage" in package.json 
-npm run build 
-serve -s build
+yarn global add server (if not installed)   
+remove key "homepage" in package.json   
+npm run build   
+serve -s build  
 
 ## Build
 npm run build or yarn build 
