@@ -45,12 +45,28 @@ create-react-app my-app
 npx create-react-app my-app
 
 ## Start
+### development
 npm start or yarn start
 http://localhost:3000/
+### production
+yarn global add server (if not installed)
+remove key "homepage" in package.json
+npm run build
+serve -s build
 
 ## Build
 npm run build or yarn build
 Builds the app for production to the build folder
+
+## Test gh-pages GitHub
+create gh-pages branch in my repository
+npm install --save gh-pages
+add to package.json:
+* "homepage": "https://name_user.github.io/name_app"
+* add to scripts:
+- "predeploy": "npm run build",
+- "deploy": "gh-pages -d build"
+rpm run deploy
 
 ## CSS-Modules
 npm run eject
