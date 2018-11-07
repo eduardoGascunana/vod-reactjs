@@ -1,4 +1,4 @@
-# cra + react + react-router + css-modules
+# CRA + React + React-Router + CSS-Modules
 
 Simulates a Video-On-Demand front site distributed in:
 * Home
@@ -37,27 +37,27 @@ index.js
 │   ├── Cart.js
 ```
 
-### Install create-react-app
-## npm
+## Install create-react-app
+### npm
 npm install -g create-react-app 
 create-react-app my-app
-## npx
+### npx
 npx create-react-app my-app
 
-### Start
+## Start
 npm start or yarn start
 http://localhost:3000/
 
-### Build
+## Build
 npm run build or yarn build
 Builds the app for production to the build folder
 
-### CSS-Modules
+## CSS-Modules
 npm run eject
 In webpack.config.dev.js and webpack.config.prod.js search "require.resolve('css-loader')" and add:
 * modules: true,
 * localIdentName: "[name]__[local]___[hash:base64:5]"
 
-### Responsive Web Design
+## Responsive Web Design
 It shows changes in lists and categories menu according device resolution
 
