@@ -65,7 +65,7 @@ add to package.json:
 - "homepage": "https://name_user.github.io/name_app"
 - add to scripts:
   - "predeploy": "npm run build",
-  - "deploy": "gh-pages -d build"
+  - "deploy": "gh-pages -d build"   
 rpm run deploy  
 
 ## CSS-Modules
