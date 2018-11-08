@@ -65,7 +65,8 @@ add to package.json:
 - "homepage": "https://name_user.github.io/name_app"
 - add to scripts:
   - "predeploy": "npm run build",
-  - "deploy": "gh-pages -d build"   
+  - "deploy": "gh-pages -d build"  
+  
 rpm run deploy  
 
 ## CSS-Modules
@@ -75,5 +76,5 @@ In webpack.config.dev.js and webpack.config.prod.js search "require.resolve('css
 - localIdentName: "\[name]\_\_\[local]\_\_\[hash:base64:5]"
 
 ## Responsive Web Design
-It shows changes in lists and categories menu according device resolution
+It shows info in covers lists and fix or lateral side categories menu according device resolution 
 
